@@ -5,24 +5,41 @@ import { SettingsIcon } from "@/ui/Icons"
 import { useNavigate } from "react-router-dom"
 import OrderHistory from "@/components/OrderHistory"
 import useGlobalStore from "@/store"
-import { useEffect } from "react"
+import { useEffect, useState, useCallback } from "react"
+import API from '@/api/user'
+import { IUser } from '@/types'
 
 const User = () => {
     const navigate = useNavigate()
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
+    const [data, setData] = useState<IUser | null>(null)
+
+    const getUserData = useCallback(async () => {
+        const res = await API.get(JSON.parse(localStorage.getItem('userId') as string))
+        setData(res)
+    }, [API])
+
+    useEffect(() => {
+        getUserData()
+    }, [getUserData])
 
     useEffect(() => {
         changeHeaderShown(true)
     }, [])
 
+    async function Logout() {
+        localStorage.removeItem('userId')
+        window.location.replace('/')
+    }
+
     return (
         <main>
             <section className={styles.AccountInfo}>
-                <Avatar large sign="S" />
-                <h3>STAPE-Web</h3>
+                <Avatar large sign={data?.data.username[0]} url={data?.data.avatar} />
+                <h3>{data?.data.username}</h3>
 
                 <div>
-                    <Button onClick={() => ({})} red>Log out</Button>
+                    <Button onClick={() => Logout()} red>Log out</Button>
                     <SettingsIcon className={styles.Icon} onClick={() => navigate("/settings")} />
                 </div>
             </section>

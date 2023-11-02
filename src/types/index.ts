@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios"
+
 export type IItem = {
     id: number
     title: string,
@@ -10,3 +12,18 @@ export type IStep = {
     title: string,
     description: string
 }
+
+export type IUser = {
+    id: string;
+    data: {
+        authType?: string;
+        avatar?: string;
+        dateCreate: any;
+        email: string;
+        username: string;
+    }
+}
+
+export type ApiResponse<T> = AxiosResponse<{
+    data: T
+}>

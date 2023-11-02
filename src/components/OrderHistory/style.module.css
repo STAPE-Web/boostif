@@ -26,3 +26,12 @@
     font-size: 32px;
     font-weight: 600;
 }
+
+@media screen and (max-width: 400px) {
+    .Item {
+        flex-direction: column-reverse;
+        height: auto;
+        padding: 20px 30px;
+        gap: 5px;
+    }
+}

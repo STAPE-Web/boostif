@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 15px;
     align-items: center;
+    padding: 0 30px;
 }
 
 .Settings button {
@@ -58,4 +59,10 @@
     filter: blur(75px);
     top: 50%;
     right: -30px;
+}
+
+@media screen and (max-width: 1000px) {
+    .Settings::after {
+        display: none;
+    }
 }

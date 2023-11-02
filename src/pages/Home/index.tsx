@@ -4,9 +4,11 @@ import ListItems from '@/components/ListItems'
 import OrderSteps from '@/components/OrderSteps'
 import { useEffect } from 'react'
 import useGlobalStore from '@/store'
+import { useSearchParams } from "react-router-dom"
 
 const Home = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
+    const [searchParams] = useSearchParams()
 
     function navigate() {
         let section = document.getElementById("Items");
@@ -15,7 +17,11 @@ const Home = () => {
 
     useEffect(() => {
         changeHeaderShown(true)
-    }, [])
+        if (searchParams.get('uid') !== null) {
+            localStorage.setItem("userId", JSON.stringify(searchParams.get('uid')))
+            window.location.replace('/')
+        }
+    }, [searchParams])
 
     return (
         <main>

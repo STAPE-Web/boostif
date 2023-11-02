@@ -8,11 +8,24 @@ import Button from '@/ui/Buttons/Default'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '@/ui/Avatar'
 import useGlobalStore from '@/store'
+import { useCallback, useEffect, useState } from 'react'
+import API from '@/api/user'
+import { IUser } from '@/types'
 
 const Header = () => {
     const navigate = useNavigate()
     const headerShown = useGlobalStore(state => state.headerShown)
-    const isAuth = localStorage.getItem('isAuth')
+    const userId = JSON.parse(localStorage.getItem('userId') as string)
+    const [data, setData] = useState<IUser | null>(null)
+
+    const getUserData = useCallback(async () => {
+        const res = await API.get(JSON.parse(localStorage.getItem('userId') as string))
+        setData(res)
+    }, [API])
+
+    useEffect(() => {
+        getUserData()
+    }, [getUserData])
 
     return (
         <>
@@ -30,8 +43,8 @@ const Header = () => {
 
                 <div className={styles.Box}>
                     <Language language='En' />
-                    {isAuth
-                        ? <Avatar sign='S' onClick={() => navigate(`/profile`)} />
+                    {userId !== '' && userId !== null && userId !== undefined
+                        ? <Avatar sign={data?.data.username[0]} url={data?.data.avatar} onClick={() => navigate(`/profile`)} />
                         : <Button onClick={() => navigate("/signin")}>Sign in</Button>
                     }
                 </div>

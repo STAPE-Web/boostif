@@ -12,7 +12,7 @@ const Item: FC<Props> = ({ item }) => {
     const navigate = useNavigate()
 
     return (
-        <div className={styles.Item} style={{ background: `url(${item.image}) no-repeat` }}>
+        <div className={styles.Item} style={{ background: `url(${item.image}) no-repeat`, backgroundSize: 'cover' }}>
             <h2>{item.title}</h2>
             <p>{item.description}</p>
             <Button onClick={() => navigate(`/item/${item.id}`)}>Order Now</Button>

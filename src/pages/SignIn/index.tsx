@@ -6,6 +6,7 @@ import styles from './style.module.css'
 import ButtonGoogle from '@/ui/Buttons/Google'
 import Input from "@/ui/Input"
 import { Link } from "react-router-dom"
+import API from "@/api/auth"
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
@@ -16,9 +17,19 @@ const SignIn = () => {
         changeHeaderShown(false)
     }, [])
 
-    function Login() {
-        localStorage.setItem('isAuth', JSON.stringify(true))
-        window.location.replace('/')
+    async function Login() {
+        const data = await API.login(email, password)
+        if (data.ok) {
+            localStorage.setItem('userId', JSON.stringify(data.id))
+            window.location.replace('/')
+        } else {
+            console.log(data)
+        }
+    }
+
+    async function LoginWithGoogle() {
+        const data = await API.oauth()
+        window.location.href = data.url
     }
 
     return (
@@ -35,7 +46,7 @@ const SignIn = () => {
 
                 <div className={styles.Line} />
 
-                <ButtonGoogle onClick={() => Login()} />
+                <ButtonGoogle onClick={() => LoginWithGoogle()} />
             </div>
         </main>
     )

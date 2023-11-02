@@ -34,3 +34,19 @@
     height: 20px;
     color: rgba(255, 255, 255, 0.3);
 }
+
+@media screen and (max-width: 750px) {
+    .Controlls {
+        display: none;
+    }
+
+    .LogoBox {
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .Box {
+        gap: 15px;
+    }
+}

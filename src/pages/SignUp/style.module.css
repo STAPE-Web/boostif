@@ -20,6 +20,7 @@
     gap: 15px;
     align-items: center;
     margin-top: 50px;
+    padding: 0 30px;
 }
 
 .Form button {
@@ -68,4 +69,10 @@
     filter: blur(75px);
     top: 50%;
     right: -30px;
+}
+
+@media screen and (max-width: 650px) {
+    .Auth::after {
+        display: none;
+    }
 }

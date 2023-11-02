@@ -36,3 +36,9 @@
 .Order .Bottom button {
     width: 100%;
 }
+
+@media screen and (max-width: 950px) {
+    .Order {
+        max-width: 100%;
+    }
+}

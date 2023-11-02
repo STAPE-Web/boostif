@@ -11,6 +11,7 @@
     font-size: 64px;
     font-weight: 700;
     color: #fff;
+    padding: 0 30px;
 }
 
 .BackgroundColor {
@@ -41,4 +42,21 @@
     justify-content: space-between;
     gap: 50px;
     margin-top: 50px;
+    padding: 0 30px;
+}
+
+@media screen and (max-width: 950px) {
+    .Box {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Item h1 {
+        font-size: 48px;
+    }
+
+    .Box {
+        padding: 0 15px;
+    }
 }
