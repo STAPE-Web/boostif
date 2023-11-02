@@ -1,0 +1,21 @@
+.Checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Icon {
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.Icon.Active {
+    opacity: 1;
+}

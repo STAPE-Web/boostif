@@ -1,0 +1,41 @@
+.Step {
+    background: #050622;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px 0px rgba(86, 79, 255, 0.5);
+    padding: 70px 30px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Step:nth-child(2) {
+    box-shadow: 0px 10px 30px 0px rgba(255, 255, 255, 0.5);
+}
+
+.Step h4 {
+    position: absolute;
+    top: -70px;
+    font-size: 110px;
+    text-shadow: 3px 0 #564FFF, -3px 0 #564FFF, 0 3px #564FFF, 0 -3px #564FFF,
+        2px 2px #564FFF, -2px -2px #564FFF, 2px -2px #564FFF, -2px 2px #564FFF;
+    color: #050622;
+}
+
+.Step:nth-child(2) h4 {
+    text-shadow: 3px 0 #fff, -3px 0 #fff, 0 3px #fff, 0 -3px #fff,
+        2px 2px #fff, -2px -2px #fff, 2px -2px #fff, -2px 2px #fff;
+}
+
+.Step h3 {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.Step p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}

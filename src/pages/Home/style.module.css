@@ -1,0 +1,121 @@
+.TopBackground {
+    position: absolute;
+    width: 124px;
+    height: 124px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    top: -100px;
+    right: 30%;
+}
+
+.Section1 {
+    width: 100%;
+    height: calc(100vh - 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.Section1 h1 {
+    color: #FFF;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    max-width: 800px;
+    position: relative;
+}
+
+.Section1::before {
+    content: '';
+    position: absolute;
+    width: 124px;
+    height: 124px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    top: 30%;
+    left: -100px;
+}
+
+.Section1::after {
+    content: '';
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    top: 70%;
+    right: -30px;
+}
+
+.Section2 {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    position: relative;
+    align-items: center;
+}
+
+.Section2::before {
+    content: '';
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    z-index: -1;
+}
+
+.Section2::after {
+    content: '';
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    bottom: 10%;
+    left: -100px;
+    z-index: -1;
+}
+
+.Section3 {
+    padding: 50px 0;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.Section4 {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    gap: 100px;
+    flex-direction: column;
+    padding: 50px 0;
+    margin: 0 auto;
+    position: relative;
+}
+
+.Section4::after {
+    content: '';
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    bottom: 10%;
+    right: -100px;
+    z-index: -1;
+}
+
+.Section3 h2,
+.Section4 h2 {
+    color: #FFF;
+    font-size: 48px;
+    font-weight: 600;
+}

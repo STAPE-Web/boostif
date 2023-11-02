@@ -1,0 +1,41 @@
+.Avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Avatar p {
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.Avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.Avatar:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.Avatar.Large {
+    width: 200px;
+    height: 200px;
+    cursor: default;
+}
+
+.Avatar.Large:hover {
+    box-shadow: none;
+}
+
+.Avatar.Large p {
+    font-size: 60px;
+}

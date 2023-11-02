@@ -1,0 +1,16 @@
+.Button {
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.10);
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Button:hover {
+    opacity: 0.7;
+}

@@ -1,0 +1,61 @@
+.Settings {
+    width: 100%;
+    height: calc(100vh - 130px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Settings section {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.Settings button {
+    width: 100%;
+}
+
+.Settings h1 {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.Settings .Icon {
+    width: 20px;
+    height: 20px;
+}
+
+.Line {
+    width: 120px;
+    background: rgba(255, 255, 255, 0.20);
+    height: 1px;
+    margin: 15px 0;
+}
+
+.Settings::before {
+    content: '';
+    position: absolute;
+    width: 124px;
+    height: 124px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    top: 20%;
+    left: 0;
+}
+
+.Settings::after {
+    content: '';
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: rgba(86, 79, 255, 0.50);
+    filter: blur(75px);
+    top: 50%;
+    right: -30px;
+}

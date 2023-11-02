@@ -1,0 +1,24 @@
+.Button {
+    border-radius: 10px;
+    background: #564FFF;
+    height: 45px;
+    padding: 0 30px;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.Button:hover {
+    opacity: 0.7;
+}
+
+.Button.Red {
+    background: #FF7961;
+}

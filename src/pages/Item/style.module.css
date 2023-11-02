@@ -1,0 +1,44 @@
+.Item {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px auto;
+}
+
+.Item h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.BackgroundColor {
+    width: 100%;
+    height: 480px;
+    background: linear-gradient(180deg, transparent 0%, #050622 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.Background {
+    width: 100%;
+    height: 480px;
+    background: url("../../assets/ItemBg.jpg") no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    opacity: 0.7;
+}
+
+.Box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 50px;
+}

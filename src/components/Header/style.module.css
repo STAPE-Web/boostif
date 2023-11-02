@@ -1,0 +1,36 @@
+.Header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.Logo {
+    width: 100px;
+    cursor: pointer;
+}
+
+.LogoBox {
+    width: 100%;
+}
+
+.Box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.Controlls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Controlls .Icon {
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 255, 255, 0.3);
+}

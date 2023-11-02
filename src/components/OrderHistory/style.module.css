@@ -1,0 +1,28 @@
+.OrderHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.Item {
+    background: rgba(255, 255, 255, 0.1);
+    height: 70px;
+    border-radius: 15px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Item h3 {
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.Item p {
+    color: #FFF;
+    font-size: 32px;
+    font-weight: 600;
+}
