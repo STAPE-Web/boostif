@@ -13,6 +13,7 @@ const User = () => {
     const navigate = useNavigate()
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
     const [data, setData] = useState<IUser | null>(null)
+    const changePage = useGlobalStore(state => state.changePage)
 
     const getUserData = useCallback(async () => {
         const res = await API.get(JSON.parse(localStorage.getItem('userId') as string))
@@ -25,6 +26,7 @@ const User = () => {
 
     useEffect(() => {
         changeHeaderShown(true)
+        changePage("User")
     }, [])
 
     async function Logout() {

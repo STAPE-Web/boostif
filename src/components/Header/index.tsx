@@ -36,7 +36,7 @@ const Header = () => {
 
                 <div className={styles.Controlls}>
                     <Search />
-                    <ButtonSquare onClick={() => ({})}>
+                    <ButtonSquare onClick={() => navigate("/search?q=")}>
                         <FilterIcon className={styles.Icon} />
                     </ButtonSquare>
                 </div>

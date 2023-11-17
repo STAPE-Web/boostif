@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom"
 
 const Home = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
+    const changePage = useGlobalStore(state => state.changePage)
     const [searchParams] = useSearchParams()
 
     function navigate() {
@@ -17,6 +18,7 @@ const Home = () => {
 
     useEffect(() => {
         changeHeaderShown(true)
+        changePage("Home")
         if (searchParams.get('uid') !== null) {
             localStorage.setItem("userId", JSON.stringify(searchParams.get('uid')))
             window.location.replace('/')
@@ -36,10 +38,10 @@ const Home = () => {
                 <ListItems />
             </section>
 
-            <section className={styles.Section3}>
+            {/* <section className={styles.Section3}>
                 <h2>Our customers’ reviews</h2>
-                {/* Reviews */}
-            </section>
+                Reviews
+            </section> */}
 
             <section className={styles.Section4}>
                 <h2>How do I order?</h2>

@@ -4,7 +4,7 @@ class API {
     async login(email: string, password: string) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/login`, {
             email: email,
-            password: password
+            password: password,
         }).then(res => res.data)
     }
 

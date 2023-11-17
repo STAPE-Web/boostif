@@ -6,9 +6,11 @@ import Order from "@/components/Order"
 
 const Item = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
+    const changePage = useGlobalStore(state => state.changePage)
 
     useEffect(() => {
         changeHeaderShown(true)
+        changePage("Item")
     }, [])
 
     return (

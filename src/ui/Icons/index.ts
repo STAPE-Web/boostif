@@ -9,6 +9,7 @@ import Twitter from './Twitter'
 import Settings from './Settings'
 import Delete from './Delete'
 import Check from './Check'
+import Send from './Send'
 
 export {
     Search as SearchIcon,
@@ -21,5 +22,6 @@ export {
     Twitter as TwitterIcon,
     Settings as SettingsIcon,
     Delete as DeleteIcon,
-    Check as CheckIcon
+    Check as CheckIcon,
+    Send as SendIcon,
 }

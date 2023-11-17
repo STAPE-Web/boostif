@@ -27,3 +27,15 @@ export type IUser = {
 export type ApiResponse<T> = AxiosResponse<{
     data: T
 }>
+
+export type IMessage = {
+    content: string
+    sender: string
+}
+
+export type IMessageRes = {
+    timestamp: string
+    session: string
+    messageData: IMessage
+
+}

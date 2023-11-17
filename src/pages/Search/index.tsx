@@ -5,9 +5,11 @@ import styles from './style.module.css'
 
 const Search = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
+    const changePage = useGlobalStore(state => state.changePage)
 
     useEffect(() => {
         changeHeaderShown(true)
+        changePage("Search")
     }, [])
 
     return (
