@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import Items from './Modes/Items'
+import Items from './Items'
 
 const AdminContent = () => {
     return (
