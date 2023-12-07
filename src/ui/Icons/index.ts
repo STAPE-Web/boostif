@@ -10,6 +10,7 @@ import Settings from './Settings'
 import Delete from './Delete'
 import Check from './Check'
 import Send from './Send'
+import Edit from "./Edit";
 
 export {
     Search as SearchIcon,
@@ -24,4 +25,5 @@ export {
     Delete as DeleteIcon,
     Check as CheckIcon,
     Send as SendIcon,
+    Edit as EditIcon,
 }

@@ -1,7 +1,12 @@
-import { useState } from "react"
+import { useState, FC } from "react"
 import styles from './style.module.css'
+import { IService } from "@/types"
 
-const ItemInfo = () => {
+interface Props {
+    data: IService | null
+}
+
+const ItemInfo: FC<Props> = ({ data }) => {
     const [tab, setTab] = useState("Description")
     const tabs = ["Description", "Details", "Requirements"]
 
@@ -9,43 +14,25 @@ const ItemInfo = () => {
         switch (tab) {
             case "Description": return <>
                 <div>
-                    <h2>BUYING THIS BOOST YOU GET:</h2>
-                    <ul>
-                        <li>MYTHIC PLUS RUN DUNGEON BOOST of the chosen key level</li>
-                        <li>EPIC GEAR up to 447 ilvl from Great Vault (iLvl depends on chosen key level)</li>
-                        <li>MORE EPIC GEAR up to 431 ilvl from Dungeon Chest (iLvl depends on chosen key level)</li>
-                        <li>MYTHIC PLUS RATING improved (if you haven't done this particular dungeon on chosen difficulty yet)</li>
-                        <li>135 VALOR POINTS for each run (+65 extra points if you haven't completed the dungeon on 15 level yet)</li>
-                        <li>All the other ITEMS and GOLD your character collects</li>
-                        <li>A part of requirements towards KEYSTONE MASTER achievement</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h2>HOW SOON DO WE START?</h2>
-                    <p>Normally we will be ready to start your order within 30 minutes after purchase. We don't like to waste your time. However, slight delays are possible when we are facing an unusual volume of orders.</p>
-                </div>
-
-                <div>
-                    <h2>HOW LONG WILL IT TAKE?</h2>
-                    <p>It's usually really fast, around 30 minutes per dungeon, but it's not guaranteed to be within the time limit. To request the within-time-limit Mythic+ run, please choose the respective option or simply contact us to add it to your order.</p>
+                    <p>When you purchase this boost, you receive a Mythic Plus Run Dungeon Boost at your chosen key level, expertly completed by a professional team, ensuring a seamless run without the hassle of LFG groups. Whether you provide your key or use ours, you'll obtain epic gear up to 483 ilvl from the Great Vault and additional epic gear up to 470 ilvl from the Dungeon Chest, the item levels varying based on your chosen key level. Your Mythic Plus rating will improve if the selected dungeon hasn't been completed on the chosen difficulty yet. Alongside, you'll acquire Crest Fragments and Flightstones currency. We aim to start your order within 30 minutes of purchase, minimizing delays, though unusual order volumes may cause slight delays. The process is generally swift, taking around 30 minutes per dungeon, but the specific time frame isn't guaranteed. For a within-time-limit Mythic+ run, choose the corresponding option or contact us to add it to your order. Check the table for this season's Mythic+ key levels and the associated item levels for completion and the subsequent weekly reset.</p>
                 </div>
             </>
 
             case "Details": return <>
                 <h2>HOW DO WE DO THIS BOOST?</h2>
                 <ul>
-                    <li>We receive your order and contact you within 15 min after that</li>
-                    <li>We discuss details with you (realm, character's name, etc) and schedule your boost</li>
-                    <li>At the appointed time our team takes your character to the Mythic+ dungeon of the chosen level</li>
+                    {data?.data.details.map(detail => (
+                        <li key={data?.data.details.indexOf(detail)}>{detail}</li>
+                    ))}
                 </ul>
             </>
 
             case "Requirements": return <>
                 <h2>WHAT ARE THE REQUIREMENTS?</h2>
                 <ul>
-                    <li>Active WoW account</li>
-                    <li>70 Lvl character</li>
+                    {data?.data.requirements.map(detail => (
+                        <li key={data?.data.details.indexOf(detail)}>{detail}</li>
+                    ))}
                 </ul>
             </>
         }

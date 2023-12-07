@@ -37,5 +37,26 @@ export type IMessageRes = {
     timestamp: string
     session: string
     messageData: IMessage
+}
 
+export type IGame = {
+    id: string,
+    data: {
+        image: string
+        name: string
+        text: string
+    }
+}
+
+export type IService = {
+    id: string,
+    data: {
+        image: string
+        name: string
+        backgroundImage: string
+        game: string
+        details: string[]
+        requirements: string[]
+        price: string
+    }
 }

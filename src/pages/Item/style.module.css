@@ -27,7 +27,6 @@
 .Background {
     width: 100%;
     height: 480px;
-    background: url("../../assets/ItemBg.jpg") no-repeat;
     background-size: cover;
     position: absolute;
     top: 0;

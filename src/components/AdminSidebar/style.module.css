@@ -1,0 +1,41 @@
+.Sidebar {
+    height: 100vh;
+    width: 300px;
+    background: #1E1F39;
+    padding: 30px 30px 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    position: fixed;
+}
+
+.Logo {
+    width: 123px;
+    height: auto;
+    margin-left: 30px;
+}
+
+.Sidebar ul {
+    list-style: none;
+}
+
+.Sidebar ul li {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 0 30px 30px 0;
+    padding: 0 30px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 14px;
+}
+
+.Sidebar ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.Sidebar ul li.Active {
+    background: #564FFF;
+    color: #fff;
+}
