@@ -49,7 +49,7 @@ const Catalog = () => {
                 <div className={styles.Grid}>
                     {data.map(item => (
                         <div key={item.id} className={styles.Item}>
-                            <img src={`${import.meta.env.VITE_PUBLIC}${item.data.image}`} alt="" />
+                            <img src={item.data.image[0] === "/" ? `${import.meta.env.VITE_PUBLIC}${item.data.image}` : item.data.image} alt="" />
                             <div className={styles.Shadow} />
 
                             <div className={styles.Box}>

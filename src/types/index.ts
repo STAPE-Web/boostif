@@ -58,5 +58,6 @@ export type IService = {
         details: string[]
         requirements: string[]
         price: string
+        description: string
     }
 }

@@ -17,12 +17,12 @@ class API {
         }).then((res) => res.data)
     }
 
-    async create(title: string, price: string, description: string, details: string[], requirements: string[], activePage: string) {
+    async create(title: string, price: string, description: string, details: string[], requirements: string[], activePage: string, imagePath: string) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/items/create`, {
             name: title,
             price, details, description, requirements,
             game: activePage,
-            image: ""
+            image: imagePath
         }).then((res) => res.data)
     }
 
@@ -31,6 +31,15 @@ class API {
             params: {
                 id
             }
+        }).then((res) => res.data)
+    }
+
+    async update(id: string, title: string, price: string, description: string, imagePath: string) {
+        return await axios.put(`${import.meta.env.VITE_SERVER}/items/update`, {
+            id,
+            name: title,
+            price, description,
+            image: imagePath
         }).then((res) => res.data)
     }
 }
