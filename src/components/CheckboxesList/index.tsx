@@ -1,17 +1,18 @@
 import Checkbox from "@/ui/Checkbox"
 import { FC } from "react"
 import styles from './style.module.css'
+import { IArray } from "@/store/types/admin"
 
 interface Props {
-    array: string[]
-    setValue: React.Dispatch<React.SetStateAction<string[]>>
-    value: string[]
+    array: IArray[]
+    setValue: React.Dispatch<React.SetStateAction<IArray[]>>
+    value: IArray[]
 }
 
 const CheckboxesList: FC<Props> = ({ array, setValue, value }) => {
-    function selectItem(arr: string) {
+    function selectItem(arr: IArray) {
         if (value.includes(arr)) {
-            const filteredArr = value.filter(i => i !== arr)
+            const filteredArr = value.filter(i => i.name !== arr.name)
             setValue(filteredArr)
         } else {
             setValue(prev => [...prev, arr])
@@ -20,10 +21,10 @@ const CheckboxesList: FC<Props> = ({ array, setValue, value }) => {
 
     return (
         <div className={styles.List}>
-            {array.map(arr => (
-                <div className={styles.Item} key={array.indexOf(arr)} onClick={() => selectItem(arr)}>
+            {array.map((arr, index) => (
+                <div className={styles.Item} key={index} onClick={() => selectItem(arr)}>
                     <Checkbox active={value.includes(arr)} />
-                    {arr}
+                    {arr.name}
                 </div>
             ))}
         </div>

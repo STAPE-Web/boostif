@@ -6,17 +6,18 @@ import styles from './style.module.css'
 interface Props {
     value: number
     setValue: React.Dispatch<React.SetStateAction<number>>
+    maxCount: number
 }
 
-const Calculate: FC<Props> = ({ setValue, value }) => {
+const Calculate: FC<Props> = ({ setValue, value, maxCount }) => {
     useEffect(() => {
-        if (value >= 15) setValue(15)
+        if (value >= maxCount) setValue(maxCount)
         if (value <= 1) setValue(1)
     }, [value])
 
     return (
         <div className={styles.Calculate}>
-            <Input max={15} min={1} label="Run(s)" value={value} onChange={e => setValue(Number(e.target.value))} placeholder="Enter Runs" type="number" />
+            <Input max={maxCount} min={1} label="Run(s)" value={value} onChange={e => setValue(Number(e.target.value))} placeholder="Enter Runs" type="number" />
             <Range value={value} setValue={setValue} />
         </div>
     )

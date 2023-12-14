@@ -27,6 +27,20 @@ const Items = () => {
     const [updatePrice, setUpdatePrice] = useState("")
     const [updateDescription, setUpdateDescription] = useState("")
 
+    const additionalData = useAdminStore(state => state.data)
+    const changeModal = useAdminStore(state => state.changeModal)
+    const changeDetails = useAdminStore(state => state.changeDetails)
+    const changeRequirements = useAdminStore(state => state.changeRequirements)
+    const changePlatform = useAdminStore(state => state.changePlatform)
+    const changeService = useAdminStore(state => state.changeService)
+    const changeRuns = useAdminStore(state => state.changeRuns)
+    const changeCalculator = useAdminStore(state => state.changeCalculator)
+
+
+    function AdditionalSettings() {
+        changeModal(true)
+    }
+
     const navigate = useNavigate()
 
     const getReviews = useCallback(async () => {
@@ -91,6 +105,13 @@ const Items = () => {
             setUpdatePrice(res.data.price)
             setUpdateDescription(res.data.description)
             setUpdateId(id)
+            setImagePath(res.data.image)
+            changeDetails(res.data.details)
+            changeRequirements(res.data.requirements)
+            if (res.data.platform !== undefined) changePlatform(res.data.platform)
+            if (res.data.service !== undefined) changeService(res.data.service)
+            if (res.data.runs !== undefined) changeRuns(res.data.runs)
+            if (res.data.hideCalculator !== undefined) changeCalculator(res.data.hideCalculator)
         } else {
             setUpdateTitle("")
             setUpdatePrice("")
@@ -98,11 +119,34 @@ const Items = () => {
             setImagePath("")
             setImage([])
             setUpdateId(id)
+            changeDetails([""])
+            changeRequirements([""])
+            changePlatform({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "PC", price: 0, hidden: false },
+                    { name: "Xbox", price: 0, hidden: false },
+                    { name: "PS", price: 0, hidden: false }
+                ]
+            })
+            changeService({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "", price: 0 }
+                ]
+            })
+            changeRuns({
+                title: "",
+                count: 0
+            })
+            changeCalculator(false)
         }
     }
 
     async function updateReview() {
-        const data = await API.update(updateId, updateTitle, updatePrice, updateDescription, imagePath)
+        const data = await API.update(updateId, updateTitle, updatePrice, updateDescription, imagePath, additionalData)
         if (data) {
             getReviews()
             setUpdateTitle("")
@@ -111,6 +155,30 @@ const Items = () => {
             setUpdateId("")
             setImagePath("")
             setImage([])
+            changeModal(false)
+            changeDetails([""])
+            changeRequirements([""])
+            changePlatform({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "PC", price: 0, hidden: false },
+                    { name: "Xbox", price: 0, hidden: false },
+                    { name: "PS", price: 0, hidden: false }
+                ]
+            })
+            changeService({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "", price: 0 }
+                ]
+            })
+            changeRuns({
+                title: "",
+                count: 0
+            })
+            changeCalculator(false)
         }
     }
 
@@ -162,17 +230,20 @@ const Items = () => {
                         </div>
 
                         {updateId === item.id && <div className={styles.UpdateBox}>
-                            <input className={styles.UploadInput} id='upload' type="file" onChange={e => setImage(e.target.files)} />
-                            <label htmlFor="upload" className={styles.Button}>
-                                {image.length !== 0
-                                    ? <>
-                                        <CheckIcon className={styles.Icon} /> Image Updated
-                                    </>
-                                    : <>
-                                        <ImageIcon className={styles.Icon} /> Update Image
-                                    </>
-                                }
-                            </label>
+                            <div className={styles.Row}>
+                                <input className={styles.UploadInput} id='upload' type="file" onChange={e => setImage(e.target.files)} />
+                                <label htmlFor="upload" className={styles.Button}>
+                                    {image.length !== 0
+                                        ? <>
+                                            <CheckIcon className={styles.Icon} /> Image Updated
+                                        </>
+                                        : <>
+                                            <ImageIcon className={styles.Icon} /> Update Image
+                                        </>
+                                    }
+                                </label>
+                                <button className={`${styles.Button} ${styles.Outline}`} onClick={() => AdditionalSettings()}>+ Additional settings</button>
+                            </div>
                             <Input label='' type="text" placeholder={"Enter service Name"} onChange={e => setUpdateTitle(e.target.value)} value={updateTitle} />
                             <Input label='' type="text" placeholder={"Enter service Price"} onChange={e => setUpdatePrice(e.target.value)} value={updatePrice} />
                             <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setUpdateDescription(e.target.value)} value={updateDescription} />

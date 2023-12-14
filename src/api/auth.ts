@@ -8,6 +8,13 @@ class API {
         }).then(res => res.data)
     }
 
+    async admin(login: string, password: string) {
+        return await axios.post(`${import.meta.env.VITE_SERVER}/login/admin`, {
+            login: login,
+            password: password,
+        }).then(res => res.data)
+    }
+
     async register(email: string, password: string, username: string) {
         return await axios.post(`${import.meta.env.VITE_SERVER}/register`, {
             email: email,
@@ -18,7 +25,6 @@ class API {
 
     async oauth() {
         return await axios.post(`${import.meta.env.VITE_SERVER}/google`).then(res => res.data)
-
     }
 }
 

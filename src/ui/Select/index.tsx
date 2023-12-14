@@ -1,17 +1,18 @@
-import { FC, useState } from "react"
+import React, { Dispatch, FC, SetStateAction, useState } from "react"
 import styles from './style.module.css'
 import { ArrowDownIcon, CheckIcon } from "@/ui/Icons"
+import { IArray } from "@/store/types/admin"
 
 interface Props {
-    array: string[]
-    setValue: React.Dispatch<React.SetStateAction<string>>
-    value: string
+    array: IArray[]
+    setValue: Dispatch<SetStateAction<IArray | null>>
+    value: IArray | null
 }
 
 const Select: FC<Props> = ({ array, setValue, value }) => {
     const [active, setActive] = useState(false)
 
-    function selectItem(item: string) {
+    function selectItem(item: IArray) {
         setValue(item)
         setActive(false)
     }
@@ -19,23 +20,24 @@ const Select: FC<Props> = ({ array, setValue, value }) => {
     return (
         <div className={`${styles.Module} ${active ? styles.Active : ''}`}>
             <div className={styles.Select} onClick={() => setActive(!active)}>
-                <p>{value || 'Nothing selected'}</p>
+                <p>{value?.name || 'Nothing selected'}</p>
                 <ArrowDownIcon className={styles.Icon} />
             </div>
 
             {active && <div className={styles.DropDown}>
-                {array.map(item => (
-                    <div
-                        key={item.toString()}
-                        className={styles.Item}
-                        onClick={() => selectItem(item)}
-                    >
-                        {item}
+                {array.map((item, index) => (
+                    <React.Fragment key={index}>
+                        {item.hidden && <div
+                            className={styles.Item}
+                            onClick={() => selectItem(item)}
+                        >
+                            {item.name}
 
-                        <div className={`${styles.Checked} ${item === value ? styles.Active : ''}`}>
-                            <CheckIcon className={styles.CheckIcon} />
-                        </div>
-                    </div>
+                            <div className={`${styles.Checked} ${item === value ? styles.Active : ''}`}>
+                                <CheckIcon className={styles.CheckIcon} />
+                            </div>
+                        </div>}
+                    </React.Fragment>
                 ))}
             </div>}
         </div>

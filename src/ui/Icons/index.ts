@@ -12,6 +12,7 @@ import Check from './Check'
 import Send from './Send'
 import Edit from "./Edit";
 import Image from './Image'
+import Add from './Add'
 
 export {
     Search as SearchIcon,
@@ -27,5 +28,6 @@ export {
     Check as CheckIcon,
     Send as SendIcon,
     Edit as EditIcon,
-    Image as ImageIcon
+    Image as ImageIcon,
+    Add as AddIcon
 }

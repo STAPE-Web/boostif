@@ -4,36 +4,43 @@ import styles from './style.module.css'
 import CheckboxesList from "@/components/CheckboxesList"
 import Calculate from "@/components/Calculate"
 import { IService } from "@/types"
+import Select from "@/ui/Select"
+import { IArray } from "@/store/types/admin"
 
 interface Props {
     data: IService | null
 }
 
 const Order: FC<Props> = ({ data }) => {
-    const [check, setCheck] = useState<string[]>([])
+    const [value, setValue] = useState<IArray | null>(null)
+    const [check, setCheck] = useState<IArray[]>([])
     const [runs, setRuns] = useState(1)
     const [price, setPrice] = useState(0)
 
-    const checkboxArray = ["Guaranteed timer (+1 extra item from the chest)", "Specific dungeon", "Priority start", "Premium group (2 loot traders) - FREE", "VIP group (3 loot traders)"]
-
     useEffect(() => {
         if (data !== undefined) {
-            setPrice((Number(data?.data.price) + (check.length * 2)) * runs || 0)
+            setPrice((Number(data?.data.price) + (check.reduce((acc, number) => acc + number.price, 0)) + (value?.price || 0)) * runs || 0)
         }
-    }, [check, runs, data])
-
+    }, [check, runs, data, value])
 
     return (
         <section className={styles.Order}>
             <div className={styles.Top}>
-                {/* <h3>Choose key level</h3> */}
-                {/* <Select array={selectArray} setValue={setValue} value={value} /> */}
+                {data?.data.platform.hidden !== undefined && !data.data.platform.hidden && <>
+                    {data?.data.platform.title !== undefined && <h3>{data?.data.platform.title}</h3>}
+                    {data?.data.platform.array !== undefined && <Select array={data?.data.platform.array} setValue={setValue} value={value} />}
+                </>}
 
-                <h3>Customize your boost</h3>
-                <CheckboxesList array={checkboxArray} setValue={setCheck} value={check} />
+                {data?.data.service.hidden !== undefined && !data.data.service.hidden && <>
+                    {data?.data.service.title !== undefined && <h3>{data?.data.service.title}</h3>}
+                    {data?.data.service.array !== undefined && <CheckboxesList array={data?.data.service.array} setValue={setCheck} value={check} />}
+                </>}
 
-                <h3>Add more runs</h3>
-                <Calculate value={runs} setValue={setRuns} />
+
+                {data?.data.runs !== undefined && <>
+                    {data?.data.runs !== undefined && <h3>{data?.data.runs.title}</h3>}
+                    {data?.data.runs !== undefined && <Calculate value={runs} maxCount={data?.data.runs.count} setValue={setRuns} />}
+                </>}
             </div>
 
             <div className={styles.Bottom}>

@@ -1,3 +1,4 @@
+import { IAdditional } from "@/types";
 import axios from "axios";
 
 class API {
@@ -34,12 +35,13 @@ class API {
         }).then((res) => res.data)
     }
 
-    async update(id: string, title: string, price: string, description: string, imagePath: string) {
+    async update(id: string, title: string, price: string, description: string, imagePath: string, additionalData: IAdditional) {
         return await axios.put(`${import.meta.env.VITE_SERVER}/items/update`, {
             id,
             name: title,
             price, description,
-            image: imagePath
+            image: imagePath,
+            additionalData
         }).then((res) => res.data)
     }
 }

@@ -1,3 +1,4 @@
+import { IPlatform_Service, IRuns } from "@/store/types/admin"
 import { AxiosResponse } from "axios"
 
 export type IItem = {
@@ -48,6 +49,11 @@ export type IGame = {
     }
 }
 
+type IArray = {
+    name: string
+    price: number
+}
+
 export type IService = {
     id: string,
     data: {
@@ -59,5 +65,29 @@ export type IService = {
         requirements: string[]
         price: string
         description: string
+        platform: {
+            title: string
+            hidden: boolean
+            array: IArray[]
+        }
+        service: {
+            title: string
+            hidden: boolean
+            array: IArray[]
+        }
+        runs: {
+            title: string
+            count: number
+        },
+        hideCalculator: boolean
     }
+}
+
+export type IAdditional = {
+    hideCalculator: boolean,
+    details: string[]
+    requirements: string[],
+    platform: IPlatform_Service
+    service: IPlatform_Service
+    runs: IRuns
 }
