@@ -26,21 +26,36 @@ const Order: FC<Props> = ({ data }) => {
     return (
         <section className={styles.Order}>
             <div className={styles.Top}>
-                {data?.data.platform.hidden !== undefined && !data.data.platform.hidden && <>
+                {data?.data.platform !== undefined ? !data.data.platform.hidden && <>
                     {data?.data.platform.title !== undefined && <h3>{data?.data.platform.title}</h3>}
                     {data?.data.platform.array !== undefined && <Select array={data?.data.platform.array} setValue={setValue} value={value} />}
-                </>}
+                </>
+                    : <>
+                        <h3>Platform</h3>
+                        <Select array={[{ name: "PC", price: 1, hidden: true }, { name: "Xbox", price, hidden: true }]} setValue={setValue} value={value} />
+                    </>
+                }
 
-                {data?.data.service.hidden !== undefined && !data.data.service.hidden && <>
+                {data?.data.service !== undefined ? !data.data.service.hidden && <>
                     {data?.data.service.title !== undefined && <h3>{data?.data.service.title}</h3>}
                     {data?.data.service.array !== undefined && <CheckboxesList array={data?.data.service.array} setValue={setCheck} value={check} />}
-                </>}
+                </>
+                    : <>
+                        <h3>Service</h3>
+                        <CheckboxesList array={[{ name: "Priority start", price: 2 }]} setValue={setCheck} value={check} />
+                    </>
+                }
 
 
-                {data?.data.runs !== undefined && <>
+                {data?.data.runs !== undefined ? <>
                     {data?.data.runs !== undefined && <h3>{data?.data.runs.title}</h3>}
                     {data?.data.runs !== undefined && <Calculate value={runs} maxCount={data?.data.runs.count} setValue={setRuns} />}
-                </>}
+                </>
+                    : <>
+                        <h3>Runs</h3>
+                        <Calculate value={runs} maxCount={15} setValue={setRuns} />
+                    </>
+                }
             </div>
 
             <div className={styles.Bottom}>

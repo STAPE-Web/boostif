@@ -39,7 +39,7 @@ class API {
         return await axios.put(`${import.meta.env.VITE_SERVER}/items/update`, {
             id,
             name: title,
-            price, description,
+            price, description: description || "",
             image: imagePath,
             additionalData
         }).then((res) => res.data)
