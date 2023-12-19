@@ -15,7 +15,7 @@ const ItemInfo: FC<Props> = ({ data }) => {
             case "Description": return <>
                 <div>
                     {data?.data.description !== undefined
-                        ? <p>{data?.data.description}</p>
+                        ? <div dangerouslySetInnerHTML={{ __html: data?.data.description }} />
                         : <p>No Description</p>
                     }
                 </div>

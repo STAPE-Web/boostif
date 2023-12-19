@@ -18,6 +18,9 @@ const Modal = () => {
 
     const [calculatorHidden, setCalculatorHidden] = useState(false)
 
+    const [difficultyTitle, setTitleDifficulty] = useState("")
+    const [difficultyHidden, setHiddenDifficulty] = useState(false)
+
     const details = useAdminStore(state => state.data.details)
     const changeDetails = useAdminStore(state => state.changeDetails)
     const requirements = useAdminStore(state => state.data.requirements)
@@ -28,10 +31,26 @@ const Modal = () => {
     const changeService = useAdminStore(state => state.changeService)
     const runs = useAdminStore(state => state.data.runs)
     const changeRuns = useAdminStore(state => state.changeRuns)
+    const difficulty = useAdminStore(state => state.data.difficulty)
+    const changeDifficulty = useAdminStore(state => state.changeDifficulty)
+    const hideCalc = useAdminStore(state => state.data.hideCalculator)
     const changeCalculator = useAdminStore(state => state.changeCalculator)
 
     const [tab, setTab] = useState("Details")
-    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Global"]
+    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Difficulty"]
+
+    useEffect(() => {
+        setTitlePlatform(platform.title)
+        setHiddenPlatform(platform.hidden)
+
+        setTitleService(service.title)
+        setHiddenService(service.hidden)
+
+        setTitleDifficulty(difficulty.title)
+        setHiddenDifficulty(difficulty.hidden)
+
+        setCalculatorHidden(hideCalc)
+    }, [platform, service, difficulty, hideCalc])
 
     const handleDetails = (e: ChangeEvent<HTMLInputElement>, index: number) => {
         const newData = [...details];
@@ -67,10 +86,22 @@ const Modal = () => {
         });
     };
 
+    const handleDifficulty = (e: ChangeEvent<HTMLInputElement>, index: number, state: string) => {
+        const newData = [...difficulty.array];
+        if (state === "name") newData[index].name = e.target.value;
+        if (state === "price") newData[index].price = Number(e.target.value);
+        changeDifficulty({
+            array: newData,
+            hidden: difficulty.hidden,
+            title: difficulty.title
+        });
+    };
+
     const handleRuns = (e: ChangeEvent<HTMLInputElement>, state: string) => {
         const newData = { ...runs }
         if (state === "title") newData.title = e.target.value;
         if (state === "count") newData.count = Number(e.target.value);
+        if (state === "label") newData.label = e.target.value;
         changeRuns(newData)
     };
 
@@ -146,16 +177,39 @@ const Modal = () => {
             </>
 
             case "Runs": return <>
-                <h2>{tab}</h2>
+                <div className={styles.Row2}>
+                    <h2>{tab}</h2>
+                    <Toggle state={calculatorHidden} onChange={() => setCalculatorHidden(!calculatorHidden)} />
+                </div>
                 <Input label="" onChange={e => handleRuns(e, "title")} placeholder={"Runs Title"} type="text" value={runs.title} />
+                <Input label="" onChange={e => handleRuns(e, "label")} placeholder={"Runs Label"} type="text" value={runs.label} />
                 <Input label="Runs Max Count" onChange={e => handleRuns(e, "count")} placeholder={""} type="number" value={runs.count} />
             </>
 
-            case "Global": return <>
+            case "Difficulty": return <>
                 <div className={styles.Row2}>
-                    <h2>Hide calculator</h2>
-                    <Toggle state={calculatorHidden} onChange={() => setCalculatorHidden(!calculatorHidden)} />
+                    <h2>{tab}</h2>
+                    <Toggle state={difficultyHidden} onChange={() => setHiddenDifficulty(!difficultyHidden)} />
                 </div>
+
+                <Input label="" onChange={e => setTitleDifficulty(e.target.value)} placeholder={"Difficulty Title"} type="text" value={difficultyTitle} />
+
+                {difficulty.array.map((item, index) => (
+                    <div className={styles.Row} key={index}>
+                        <Input label="" onChange={e => handleDifficulty(e, index, "name")} placeholder={"Difficulty Name"} type="text" value={item.name} />
+                        <Input label="" onChange={e => handleDifficulty(e, index, "price")} placeholder="Price" type="number" value={item.price} />
+                        <DeleteIcon className={styles.DeleteIcon} onClick={() => changeDifficulty({
+                            hidden: difficulty.hidden, title: difficulty.title,
+                            array: difficulty.array.filter((_, id) => id !== index)
+                        })} />
+                    </div>
+                ))}
+                <button className={styles.ButtonUpdate} onClick={() => changeDifficulty({
+                    hidden: difficulty.hidden, title: difficulty.title,
+                    array: [...difficulty.array, { name: "", price: 0 }]
+                })}>
+                    <AddIcon />
+                </button>
             </>
         }
     }
@@ -173,8 +227,14 @@ const Modal = () => {
             title: serviceTitle
         })
 
+        changeDifficulty({
+            array: difficulty.array,
+            hidden: difficultyHidden,
+            title: difficultyTitle
+        })
+
         changeCalculator(calculatorHidden)
-    }, [platformHidden, platformTitle, serviceTitle, serviceHidden, calculatorHidden])
+    }, [platformHidden, platformTitle, serviceTitle, serviceHidden, calculatorHidden, difficultyHidden, difficultyTitle])
 
     return (
         <>

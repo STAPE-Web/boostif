@@ -8,6 +8,7 @@ import { CheckIcon, DeleteIcon, EditIcon, ImageIcon } from '@/ui/Icons'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from "@/firebase"
 import { useNavigate } from 'react-router-dom'
+import TextEditor from '@/components/TextEditor'
 
 const Items = () => {
     const [create, setCreate] = useState(false)
@@ -35,6 +36,7 @@ const Items = () => {
     const changeService = useAdminStore(state => state.changeService)
     const changeRuns = useAdminStore(state => state.changeRuns)
     const changeCalculator = useAdminStore(state => state.changeCalculator)
+    const changeDifficulty = useAdminStore(state => state.changeDifficulty)
 
 
     function AdditionalSettings() {
@@ -112,6 +114,7 @@ const Items = () => {
             if (res.data.service !== undefined) changeService(res.data.service)
             if (res.data.runs !== undefined) changeRuns(res.data.runs)
             if (res.data.hideCalculator !== undefined) changeCalculator(res.data.hideCalculator)
+            if (res.data.difficulty !== undefined) changeDifficulty(res.data.difficulty)
         } else {
             setUpdateTitle("")
             setUpdatePrice("")
@@ -139,9 +142,17 @@ const Items = () => {
             })
             changeRuns({
                 title: "",
-                count: 0
+                count: 0,
+                label: ""
             })
             changeCalculator(false)
+            changeDifficulty({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "", price: 0 }
+                ]
+            })
         }
     }
 
@@ -176,9 +187,17 @@ const Items = () => {
             })
             changeRuns({
                 title: "",
-                count: 0
+                count: 0,
+                label: ""
             })
             changeCalculator(false)
+            changeDifficulty({
+                title: "",
+                hidden: false,
+                array: [
+                    { name: "", price: 0 }
+                ]
+            })
         }
     }
 
@@ -201,7 +220,8 @@ const Items = () => {
                         </label>
                         <Input label='' type="text" placeholder={"Enter service Name"} onChange={e => setTitle(e.target.value)} value={title} />
                         <Input label='' type="text" placeholder={"Enter service Price"} onChange={e => setPrice(e.target.value)} value={price} />
-                        <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setDescription(e.target.value)} value={description} />
+                        {/* <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setDescription(e.target.value)} value={description} /> */}
+                        <TextEditor big={false} value={description} onChange={setDescription} />
                         <button className={styles.Button} onClick={() => createReview()} disabled={title === ""}>Create</button>
                     </div>
                 }
@@ -246,7 +266,8 @@ const Items = () => {
                             </div>
                             <Input label='' type="text" placeholder={"Enter service Name"} onChange={e => setUpdateTitle(e.target.value)} value={updateTitle} />
                             <Input label='' type="text" placeholder={"Enter service Price"} onChange={e => setUpdatePrice(e.target.value)} value={updatePrice} />
-                            <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setUpdateDescription(e.target.value)} value={updateDescription} />
+                            {/* <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setUpdateDescription(e.target.value)} value={updateDescription} /> */}
+                            <TextEditor big={false} value={updateDescription} onChange={setUpdateDescription} />
                             <div className={styles.Row}>
                                 <button className={styles.Button} onClick={() => updateReview()} disabled={updateTitle === ""}>Update</button>
                                 <button className={`${styles.Button} ${styles.Outline}`} onClick={() => updateHandler("")}>Cancel</button>

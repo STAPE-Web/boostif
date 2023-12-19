@@ -2,6 +2,7 @@ import Admin from "@/pages/Admin"
 import Catalog from "@/pages/Catalog"
 import Home from "@/pages/Home"
 import Item from "@/pages/Item"
+import Other from "@/pages/Other"
 import Search from "@/pages/Search"
 import Settings from "@/pages/Settings"
 import SignIn from "@/pages/SignIn"
@@ -19,6 +20,13 @@ const notAuthRouters = [
     { id: 7, path: '/support', element: Support },
     { id: 8, path: '/catalog/:id', element: Catalog },
     { id: 9, path: '/admin', element: Admin },
+
+    { id: 10, path: '/terms', element: Other },
+    { id: 11, path: '/privacy', element: Other },
+    { id: 12, path: '/contact', element: Other },
+    { id: 13, path: '/cookie', element: Other },
+    { id: 14, path: '/refund', element: Other },
+    { id: 15, path: '/work', element: Other },
 ]
 
 const authRouters = [
@@ -31,6 +39,13 @@ const authRouters = [
     { id: 7, path: '/support', element: Support },
     { id: 8, path: '/catalog/:id', element: Catalog },
     { id: 9, path: '/admin', element: Admin },
+
+    { id: 10, path: '/terms', element: Other },
+    { id: 11, path: '/privacy', element: Other },
+    { id: 12, path: '/contact', element: Other },
+    { id: 13, path: '/cookie', element: Other },
+    { id: 14, path: '/refund', element: Other },
+    { id: 15, path: '/work', element: Other },
 ]
 
 export { notAuthRouters, authRouters }

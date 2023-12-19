@@ -12,7 +12,8 @@ export type IPlatform_Service = {
 
 export type IRuns = {
     title: string
-    count: number
+    count: number,
+    label: string
 }
 
 export default interface State {
@@ -24,7 +25,8 @@ export default interface State {
         requirements: string[],
         platform: IPlatform_Service
         service: IPlatform_Service
-        runs: IRuns
+        runs: IRuns,
+        difficulty: IPlatform_Service
     }
 
     changeActivePage: (value: string) => void
@@ -35,5 +37,6 @@ export default interface State {
     changePlatform: (value: IPlatform_Service) => void
     changeService: (value: IPlatform_Service) => void
     changeRuns: (value: IRuns) => void
+    changeDifficulty: (value: IPlatform_Service) => void
     changeCalculator: (value: boolean) => void
 }

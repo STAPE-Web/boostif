@@ -28,6 +28,15 @@ const AdminSidebar = () => {
         { name: "17", title: "Path of Exile" },
     ]
 
+    const nav2 = [
+        { name: "18", title: "Terms & Conditions" },
+        { name: "19", title: "Privacy Policy" },
+        { name: "20", title: "Contact Us" },
+        { name: "21", title: "Cookie Policy" },
+        { name: "22", title: "Refund Policy" },
+        { name: "23", title: "Work with us" },
+    ]
+
     return (
         <div className={styles.Sidebar}>
             <div className={styles.LogoBox} onClick={() => navigate("/")}>
@@ -39,6 +48,16 @@ const AdminSidebar = () => {
                     <li key={n.name} onClick={() => changeActivePage(n.name)} className={activePage === n.name ? styles.Active : ""}>{n.title}</li>
                 ))}
             </ul>
+
+
+            <div>
+                <h3>Pages</h3>
+                <ul>
+                    {nav2.map(n => (
+                        <li key={n.name} onClick={() => changeActivePage(n.name)} className={activePage === n.name ? styles.Active : ""}>{n.title}</li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

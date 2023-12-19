@@ -4,9 +4,10 @@ import styles from './style.module.css'
 interface Props {
     value: number
     setValue: React.Dispatch<React.SetStateAction<number>>
+    maxCount: number
 }
 
-const Range: FC<Props> = ({ value, setValue }) => {
+const Range: FC<Props> = ({ value, setValue, maxCount }) => {
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         let target = e.target
         const min = Number(target.min)
@@ -20,11 +21,11 @@ const Range: FC<Props> = ({ value, setValue }) => {
 
     return (
         <div className={styles.Range}>
-            <input type="range" min={1} max={15} value={value} onChange={e => handleInputChange(e)} />
+            <input type="range" min={1} max={maxCount} value={value} onChange={e => handleInputChange(e)} />
 
             <div className={styles.Values}>
                 <div>1</div>
-                <div>15</div>
+                <div>{maxCount}</div>
             </div>
         </div>
     )

@@ -27,8 +27,9 @@ const Select: FC<Props> = ({ array, setValue, value }) => {
             {active && <div className={styles.DropDown}>
                 {array.map((item, index) => (
                     <React.Fragment key={index}>
-                        {item.hidden && <div
+                        <div
                             className={styles.Item}
+                            style={{ display: item.hidden === undefined ? "flex" : item.hidden ? "flex" : "none" }}
                             onClick={() => selectItem(item)}
                         >
                             {item.name}
@@ -36,7 +37,7 @@ const Select: FC<Props> = ({ array, setValue, value }) => {
                             <div className={`${styles.Checked} ${item === value ? styles.Active : ''}`}>
                                 <CheckIcon className={styles.CheckIcon} />
                             </div>
-                        </div>}
+                        </div>
                     </React.Fragment>
                 ))}
             </div>}

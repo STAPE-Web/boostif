@@ -36,11 +36,12 @@ const Footer = () => {
 
                         <div className={styles.Bottom}>
                             <ul>
-                                <Link to="/support"><li>Support</li></Link>
-                                <li>Private policy</li>
-                                <li>Refund policy</li>
-                                <li>Cookies policy</li>
-                                <li>Terms and conditions</li>
+                                <Link to="/terms"><li>Terms & Conditions</li></Link>
+                                <Link to="/privacy"><li>Privacy Policy</li></Link>
+                                <Link to="/contact"><li>Contact Us</li></Link>
+                                <Link to="/cookie"><li>Cookie Policy</li></Link>
+                                <Link to="/refund"><li>Refund Policy</li></Link>
+                                <Link to="/work"><li>Work with us</li></Link>
                             </ul>
 
                             <ul>

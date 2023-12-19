@@ -13,15 +13,16 @@ interface Props {
 
 const Order: FC<Props> = ({ data }) => {
     const [value, setValue] = useState<IArray | null>(null)
+    const [difficulty, setDifficulty] = useState<IArray | null>(null)
     const [check, setCheck] = useState<IArray[]>([])
     const [runs, setRuns] = useState(1)
     const [price, setPrice] = useState(0)
 
     useEffect(() => {
         if (data !== undefined) {
-            setPrice((Number(data?.data.price) + (check.reduce((acc, number) => acc + number.price, 0)) + (value?.price || 0)) * runs || 0)
+            setPrice((Number(data?.data.price) + (check.reduce((acc, number) => acc + number.price, 0)) + (value?.price || 0) + (difficulty?.price || 0)) * runs || 0)
         }
-    }, [check, runs, data, value])
+    }, [check, runs, data, value, difficulty])
 
     return (
         <section className={styles.Order}>
@@ -32,7 +33,17 @@ const Order: FC<Props> = ({ data }) => {
                 </>
                     : <>
                         <h3>Platform</h3>
-                        <Select array={[{ name: "PC", price: 1, hidden: true }, { name: "Xbox", price, hidden: true }]} setValue={setValue} value={value} />
+                        <Select array={[{ name: "PC", price: 1, hidden: true }, { name: "Xbox", price: 1, hidden: true }]} setValue={setValue} value={value} />
+                    </>
+                }
+
+                {data?.data.difficulty !== undefined ? !data.data.difficulty.hidden && <>
+                    {data?.data.difficulty.title !== undefined && <h3>{data?.data.difficulty.title}</h3>}
+                    {data?.data.difficulty.array !== undefined && <Select array={data?.data.difficulty.array} setValue={setDifficulty} value={difficulty} />}
+                </>
+                    : <>
+                        <h3>Difficulty</h3>
+                        <Select array={[{ name: "Difficult #1", price: 1 }, { name: "Difficult #2", price: 1 }]} setValue={setDifficulty} value={difficulty} />
                     </>
                 }
 
@@ -49,11 +60,11 @@ const Order: FC<Props> = ({ data }) => {
 
                 {data?.data.runs !== undefined ? <>
                     {data?.data.runs !== undefined && <h3>{data?.data.runs.title}</h3>}
-                    {data?.data.runs !== undefined && <Calculate value={runs} maxCount={data?.data.runs.count} setValue={setRuns} />}
+                    {data?.data.runs !== undefined && <Calculate value={runs} maxCount={data?.data.runs.count} setValue={setRuns} label={data?.data.runs.label} />}
                 </>
                     : <>
                         <h3>Runs</h3>
-                        <Calculate value={runs} maxCount={15} setValue={setRuns} />
+                        <Calculate value={runs} maxCount={15} setValue={setRuns} label="Run(s)" />
                     </>
                 }
             </div>

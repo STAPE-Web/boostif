@@ -1,0 +1,13 @@
+.Module {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Module h1 {
+    color: #fff;
+}
+
+.Module h1 span {
+    color: #564FFF;
+}

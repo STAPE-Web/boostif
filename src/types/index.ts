@@ -77,9 +77,15 @@ export type IService = {
         }
         runs: {
             title: string
-            count: number
+            count: number,
+            label: string
         },
-        hideCalculator: boolean
+        hideCalculator: boolean,
+        difficulty: {
+            title: string
+            hidden: boolean
+            array: IArray[]
+        }
     }
 }
 

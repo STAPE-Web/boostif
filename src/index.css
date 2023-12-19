@@ -39,3 +39,46 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+.ql-container.ql-snow {
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  border-radius: 0 0 15px 15px;
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  border-radius: 15px 15px 0 0;
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+}
+
+.ql-editor.ql-blank::before {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.quill ul li::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #564FFF;
+  margin-top: 8px;
+  border-radius: 100%;
+}
+
+.quill ul li {
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  line-height: 150%;
+  font-size: 16px;
+}
+
+.quill ul {
+  padding-left: 0;
+}
+
+.quill p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+}

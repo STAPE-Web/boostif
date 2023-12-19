@@ -7,6 +7,7 @@
     flex-direction: column;
     gap: 50px;
     position: fixed;
+    overflow-y: scroll;
 }
 
 .Logo {
@@ -29,6 +30,13 @@
     cursor: pointer;
     transition: 0.5s;
     font-size: 14px;
+}
+
+.Sidebar h3 {
+    padding: 0 30px;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
 .Sidebar ul li:hover {

@@ -27,8 +27,16 @@ const useAdminStore = create<State>()(devtools((set) => ({
         },
         runs: {
             title: "",
-            count: 0
+            count: 0,
+            label: ""
         },
+        difficulty: {
+            title: "",
+            hidden: false,
+            array: [
+                { name: "", price: 0 },
+            ]
+        }
     },
 
     changeActivePage: (value: string) => set({ activePage: value }),
@@ -39,6 +47,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
     changePlatform: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, platform: value } })),
     changeService: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, service: value } })),
     changeRuns: (value: IRuns) => set((state) => ({ data: { ...state.data, runs: value } })),
+    changeDifficulty: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, difficulty: value } })),
     changeCalculator: (value: boolean) => set((state) => ({ data: { ...state.data, hideCalculator: value } })),
 })))
 
