@@ -5,6 +5,7 @@ import OrderSteps from '@/components/OrderSteps'
 import { useEffect } from 'react'
 import useGlobalStore from '@/store'
 import { useSearchParams } from "react-router-dom"
+import TrustpilotWidget from '@/components/TrustBox'
 
 const Home = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
@@ -38,10 +39,10 @@ const Home = () => {
                 <ListItems />
             </section>
 
-            {/* <section className={styles.Section3}>
+            <section className={styles.Section3}>
                 <h2>Our customers’ reviews</h2>
-                Reviews
-            </section> */}
+                <TrustpilotWidget />
+            </section>
 
             <section className={styles.Section4}>
                 <h2>How do I order?</h2>

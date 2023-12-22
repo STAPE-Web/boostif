@@ -27,7 +27,7 @@ const Order: FC<Props> = ({ data }) => {
     return (
         <section className={styles.Order}>
             <div className={styles.Top}>
-                {data?.data.platform !== undefined ? !data.data.platform.hidden && <>
+                {data?.data.platform !== undefined ? data.data.platform.hidden && <>
                     {data?.data.platform.title !== undefined && <h3>{data?.data.platform.title}</h3>}
                     {data?.data.platform.array !== undefined && <Select array={data?.data.platform.array} setValue={setValue} value={value} />}
                 </>
@@ -37,7 +37,7 @@ const Order: FC<Props> = ({ data }) => {
                     </>
                 }
 
-                {data?.data.difficulty !== undefined ? !data.data.difficulty.hidden && <>
+                {data?.data.difficulty !== undefined ? data.data.difficulty.hidden && <>
                     {data?.data.difficulty.title !== undefined && <h3>{data?.data.difficulty.title}</h3>}
                     {data?.data.difficulty.array !== undefined && <Select array={data?.data.difficulty.array} setValue={setDifficulty} value={difficulty} />}
                 </>
@@ -47,7 +47,7 @@ const Order: FC<Props> = ({ data }) => {
                     </>
                 }
 
-                {data?.data.service !== undefined ? !data.data.service.hidden && <>
+                {data?.data.service !== undefined ? data.data.service.hidden && <>
                     {data?.data.service.title !== undefined && <h3>{data?.data.service.title}</h3>}
                     {data?.data.service.array !== undefined && <CheckboxesList array={data?.data.service.array} setValue={setCheck} value={check} />}
                 </>
@@ -58,7 +58,7 @@ const Order: FC<Props> = ({ data }) => {
                 }
 
 
-                {data?.data.runs !== undefined ? <>
+                {data?.data.runs !== undefined ? data?.data.hideCalculator && <>
                     {data?.data.runs !== undefined && <h3>{data?.data.runs.title}</h3>}
                     {data?.data.runs !== undefined && <Calculate value={runs} maxCount={data?.data.runs.count} setValue={setRuns} label={data?.data.runs.label} />}
                 </>
