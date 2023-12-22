@@ -161,7 +161,11 @@ const Modal = () => {
                 {service.array.map((item, index) => (
                     <div className={styles.Row} key={index}>
                         <Input label="" onChange={e => handleService(e, index, "name")} placeholder={"Service Name"} type="text" value={item.name} />
-                        <Input label="" onChange={e => handleService(e, index, "price")} placeholder="Price" type="number" value={item.price} />
+                        <div className={styles.Row}>
+                            <Input label="" onChange={e => handleService(e, index, "price")} placeholder="Price" type="number" value={item.price} />
+                            <Input label="" onChange={() => ({})} placeholder="Price" type="number" value={0} />
+                            <Input label="" onChange={() => ({})} placeholder="Price" type="number" value={0} />
+                        </div>
                         <DeleteIcon className={styles.DeleteIcon} onClick={() => changeService({
                             hidden: service.hidden, title: service.title,
                             array: service.array.filter((_, id) => id !== index)
