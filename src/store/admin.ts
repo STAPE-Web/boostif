@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import State, { IPlatform_Service, IRuns } from './types/admin'
+import State, { IPlatform_Service, IRuns, IService } from './types/admin'
 
 const useAdminStore = create<State>()(devtools((set) => ({
     activePage: "1",
@@ -22,7 +22,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
             title: "",
             hidden: false,
             array: [
-                { name: "", price: 0 }
+                { name: "", price: [0, 0, 0] }
             ]
         },
         runs: {
@@ -45,7 +45,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
     changeDetails: (value: string[]) => set((state) => ({ data: { ...state.data, details: value } })),
     changeRequirements: (value: string[]) => set((state) => ({ data: { ...state.data, requirements: value } })),
     changePlatform: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, platform: value } })),
-    changeService: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, service: value } })),
+    changeService: (value: IService) => set((state) => ({ data: { ...state.data, service: value } })),
     changeRuns: (value: IRuns) => set((state) => ({ data: { ...state.data, runs: value } })),
     changeDifficulty: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, difficulty: value } })),
     changeCalculator: (value: boolean) => set((state) => ({ data: { ...state.data, hideCalculator: value } })),

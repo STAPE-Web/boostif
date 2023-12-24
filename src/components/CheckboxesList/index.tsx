@@ -1,16 +1,16 @@
 import Checkbox from "@/ui/Checkbox"
 import { FC } from "react"
 import styles from './style.module.css'
-import { IArray } from "@/store/types/admin"
+import { IArray2 } from "@/store/types/admin"
 
 interface Props {
-    array: IArray[]
-    setValue: React.Dispatch<React.SetStateAction<IArray[]>>
-    value: IArray[]
+    array: IArray2[]
+    setValue: React.Dispatch<React.SetStateAction<IArray2[]>>
+    value: IArray2[]
 }
 
 const CheckboxesList: FC<Props> = ({ array, setValue, value }) => {
-    function selectItem(arr: IArray) {
+    function selectItem(arr: IArray2) {
         if (value.includes(arr)) {
             const filteredArr = value.filter(i => i.name !== arr.name)
             setValue(filteredArr)

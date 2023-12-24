@@ -4,10 +4,21 @@ export type IArray = {
     hidden?: boolean
 }
 
+export type IArray2 = {
+    name: string
+    price: number[],
+}
+
 export type IPlatform_Service = {
     title: string
     hidden: boolean
     array: IArray[]
+}
+
+export type IService = {
+    title: string
+    hidden: boolean
+    array: IArray2[]
 }
 
 export type IRuns = {
@@ -24,7 +35,7 @@ export default interface State {
         details: string[]
         requirements: string[],
         platform: IPlatform_Service
-        service: IPlatform_Service
+        service: IService
         runs: IRuns,
         difficulty: IPlatform_Service
     }
@@ -35,7 +46,7 @@ export default interface State {
     changeDetails: (value: string[]) => void
     changeRequirements: (value: string[]) => void
     changePlatform: (value: IPlatform_Service) => void
-    changeService: (value: IPlatform_Service) => void
+    changeService: (value: IService) => void
     changeRuns: (value: IRuns) => void
     changeDifficulty: (value: IPlatform_Service) => void
     changeCalculator: (value: boolean) => void

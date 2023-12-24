@@ -1,4 +1,4 @@
-import { IPlatform_Service, IRuns } from "@/store/types/admin"
+import { IArray2, IPlatform_Service, IRuns, IService as IService2 } from "@/store/types/admin"
 import { AxiosResponse } from "axios"
 
 export type IItem = {
@@ -73,7 +73,7 @@ export type IService = {
         service: {
             title: string
             hidden: boolean
-            array: IArray[]
+            array: IArray2[]
         }
         runs: {
             title: string
@@ -94,6 +94,6 @@ export type IAdditional = {
     details: string[]
     requirements: string[],
     platform: IPlatform_Service
-    service: IPlatform_Service
+    service: IService2
     runs: IRuns
 }

@@ -5,7 +5,7 @@ import CheckboxesList from "@/components/CheckboxesList"
 import Calculate from "@/components/Calculate"
 import { IService } from "@/types"
 import Select from "@/ui/Select"
-import { IArray } from "@/store/types/admin"
+import { IArray, IArray2 } from "@/store/types/admin"
 
 interface Props {
     data: IService | null
@@ -14,13 +14,15 @@ interface Props {
 const Order: FC<Props> = ({ data }) => {
     const [value, setValue] = useState<IArray | null>(null)
     const [difficulty, setDifficulty] = useState<IArray | null>(null)
-    const [check, setCheck] = useState<IArray[]>([])
+    const [check, setCheck] = useState<IArray2[]>([])
     const [runs, setRuns] = useState(1)
     const [price, setPrice] = useState(0)
 
+    const platforms = ["PC", "Xbox", "PS"]
+
     useEffect(() => {
         if (data !== undefined) {
-            setPrice((Number(data?.data.price) + (check.reduce((acc, number) => acc + number.price, 0)) + (value?.price || 0) + (difficulty?.price || 0)) * runs || 0)
+            setPrice((Number(data?.data.price) + (check.reduce((acc, number) => acc + number.price[platforms.findIndex(i => i === value?.name)], 0)) + (value?.price || 0) + (difficulty?.price || 0)) * runs || 0)
         }
     }, [check, runs, data, value, difficulty])
 
@@ -53,7 +55,7 @@ const Order: FC<Props> = ({ data }) => {
                 </>
                     : <>
                         <h3>Service</h3>
-                        <CheckboxesList array={[{ name: "Priority start", price: 2 }]} setValue={setCheck} value={check} />
+                        <CheckboxesList array={[{ name: "Priority start", price: [2, 2, 2] }]} setValue={setCheck} value={check} />
                     </>
                 }
 

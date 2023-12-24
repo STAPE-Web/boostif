@@ -111,7 +111,16 @@ const Items = () => {
             changeDetails(res.data.details)
             changeRequirements(res.data.requirements)
             if (res.data.platform !== undefined) changePlatform(res.data.platform)
-            if (res.data.service !== undefined) changeService(res.data.service)
+            if (res.data.service !== undefined) {
+                if (typeof res.data.service.array[0].price !== "number") {
+                    console.log(true)
+                    changeService(res.data.service)
+                } else {
+                    changeService({
+                        ...res.data.service, array: [{ name: "", price: [0, 0, 0] }]
+                    })
+                }
+            }
             if (res.data.runs !== undefined) changeRuns(res.data.runs)
             if (res.data.hideCalculator !== undefined) changeCalculator(res.data.hideCalculator)
             if (res.data.difficulty !== undefined) changeDifficulty(res.data.difficulty)
@@ -137,7 +146,7 @@ const Items = () => {
                 title: "",
                 hidden: false,
                 array: [
-                    { name: "", price: 0 }
+                    { name: "", price: [0, 0, 0] }
                 ]
             })
             changeRuns({
@@ -182,7 +191,7 @@ const Items = () => {
                 title: "",
                 hidden: false,
                 array: [
-                    { name: "", price: 0 }
+                    { name: "", price: [0, 0, 0] }
                 ]
             })
             changeRuns({

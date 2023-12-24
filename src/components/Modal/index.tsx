@@ -75,10 +75,10 @@ const Modal = () => {
         });
     };
 
-    const handleService = (e: ChangeEvent<HTMLInputElement>, index: number, state: string) => {
+    const handleService = (e: ChangeEvent<HTMLInputElement>, index: number, state: string, priceIndex?: number) => {
         const newData = [...service.array];
         if (state === "name") newData[index].name = e.target.value;
-        if (state === "price") newData[index].price = Number(e.target.value);
+        if (state === "price" && priceIndex !== undefined) newData[index].price[priceIndex] = Number(e.target.value);
         changeService({
             array: newData,
             hidden: service.hidden,
@@ -162,9 +162,9 @@ const Modal = () => {
                     <div className={styles.Row} key={index}>
                         <Input label="" onChange={e => handleService(e, index, "name")} placeholder={"Service Name"} type="text" value={item.name} />
                         <div className={styles.Row}>
-                            <Input label="" onChange={e => handleService(e, index, "price")} placeholder="Price" type="number" value={item.price} />
-                            <Input label="" onChange={() => ({})} placeholder="Price" type="number" value={0} />
-                            <Input label="" onChange={() => ({})} placeholder="Price" type="number" value={0} />
+                            {item.price.map((price, i) => (
+                                <Input key={i} label="" onChange={e => handleService(e, index, "price", i)} placeholder="Price" type="number" value={price} />
+                            ))}
                         </div>
                         <DeleteIcon className={styles.DeleteIcon} onClick={() => changeService({
                             hidden: service.hidden, title: service.title,
@@ -174,7 +174,7 @@ const Modal = () => {
                 ))}
                 <button className={styles.ButtonUpdate} onClick={() => changeService({
                     hidden: service.hidden, title: service.title,
-                    array: [...service.array, { name: "", price: 0 }]
+                    array: [...service.array, { name: "", price: [0, 0, 0] }]
                 })}>
                     <AddIcon />
                 </button>
