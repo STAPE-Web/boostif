@@ -1,4 +1,4 @@
-import Logo from '@/assets/Logo.png'
+import Logo from '@/assets/boost15.png'
 import styles from './style.module.css'
 import useAdminStore from '@/store/admin'
 import { useNavigate } from 'react-router-dom'

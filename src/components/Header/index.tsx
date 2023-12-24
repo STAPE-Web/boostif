@@ -1,4 +1,4 @@
-import Logo from '@/assets/Logo.png'
+import Logo from '@/assets/boost15.png'
 import styles from './style.module.css'
 import Search from '@/ui/Search'
 import ButtonSquare from '@/ui/Buttons/Square'
