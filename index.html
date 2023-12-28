@@ -21,12 +21,15 @@
   <script type="module" src="/src/main.tsx"></script>
   <script src="//code.jivo.ru/widget/A9iG3SZkaL" async></script>
   <script>
-    (function (w, d, s, r, n) {
-      w.TrustpilotObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments) };
-      a = d.createElement(s); a.async = 1; a.src = r; a.type = 'text/java' + s; f = d.getElementsByTagName(s)[0];
-      f.parentNode.insertBefore(a, f)
-    })(window, document, 'script', 'https://invitejs.trustpilot.com/tp.min.js', 'tp');
-    tp('register', 'XHkZgrz1xRdv3UED');
+    document.addEventListener('DOMContentLoaded', function () {
+      const trustpilot_invitation = {
+        recipientEmail: 'john@gmail.com',
+        recipientName: 'John',
+        referenceId: 'Order_123',
+        source: 'InvitationScript',
+      };
+      tp('createInvitation', trustpilot_invitation);
+    });
   </script>
 </body>
 
