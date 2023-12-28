@@ -16,7 +16,7 @@ const TrustpilotWidget = () => {
     return (
         <div className="trustpilot-widget" data-locale="en-US" data-template-id="5613c9abf85e702406ab8c02" data-businessunit-id="6572fadaba14ca001bdaec13" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
             <a href="https://www.trustpilot.com/review/boostif.com" target="_blank" rel="noopener noreferrer">
-                Trustpilot
+                {/* Trustpilot */}
             </a>
         </div>
     );
