@@ -29,9 +29,16 @@
 }
 
 .Tabs {
+    width: 100%;
+    overflow-x: scroll;
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-bottom: 3px;
+}
+
+.Tabs::-webkit-scrollbar {
+    height: 5px;
 }
 
 .Tabs div {

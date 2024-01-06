@@ -37,6 +37,7 @@ const Items = () => {
     const changeRuns = useAdminStore(state => state.changeRuns)
     const changeCalculator = useAdminStore(state => state.changeCalculator)
     const changeDifficulty = useAdminStore(state => state.changeDifficulty)
+    const changeLevel = useAdminStore(state => state.changeLevel)
 
 
     function AdditionalSettings() {
@@ -124,6 +125,7 @@ const Items = () => {
             if (res.data.runs !== undefined) changeRuns(res.data.runs)
             if (res.data.hideCalculator !== undefined) changeCalculator(res.data.hideCalculator)
             if (res.data.difficulty !== undefined) changeDifficulty(res.data.difficulty)
+            if (res.data.level !== undefined) changeLevel(res.data.level)
         } else {
             setUpdateTitle("")
             setUpdatePrice("")
@@ -152,7 +154,8 @@ const Items = () => {
             changeRuns({
                 title: "",
                 count: 0,
-                label: ""
+                label: "",
+                price: 0
             })
             changeCalculator(false)
             changeDifficulty({
@@ -161,6 +164,13 @@ const Items = () => {
                 array: [
                     { name: "", price: 0 }
                 ]
+            })
+            changeLevel({
+                hidden: false,
+                count: 50,
+                title: "",
+                label: ["", ""],
+                price: 1
             })
         }
     }
@@ -197,7 +207,8 @@ const Items = () => {
             changeRuns({
                 title: "",
                 count: 0,
-                label: ""
+                label: "",
+                price: 0
             })
             changeCalculator(false)
             changeDifficulty({
@@ -206,6 +217,13 @@ const Items = () => {
                 array: [
                     { name: "", price: 0 }
                 ]
+            })
+            changeLevel({
+                hidden: false,
+                count: 50,
+                title: "",
+                label: ["", ""],
+                price: 1
             })
         }
     }

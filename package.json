@@ -13,6 +13,7 @@
     "axios": "^1.6.0",
     "convert-firebase-timestamp": "^0.0.5",
     "firebase": "^9.20.0",
+    "multi-range-slider-react": "^2.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",

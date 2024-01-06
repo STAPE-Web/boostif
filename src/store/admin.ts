@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
-import State, { IPlatform_Service, IRuns, IService } from './types/admin'
+import State, { ILevel, IPlatform_Service, IRuns, IService } from './types/admin'
 
 const useAdminStore = create<State>()(devtools((set) => ({
     activePage: "1",
@@ -28,7 +28,8 @@ const useAdminStore = create<State>()(devtools((set) => ({
         runs: {
             title: "",
             count: 0,
-            label: ""
+            label: "",
+            price: 0
         },
         difficulty: {
             title: "",
@@ -36,6 +37,13 @@ const useAdminStore = create<State>()(devtools((set) => ({
             array: [
                 { name: "", price: 0 },
             ]
+        },
+        level: {
+            hidden: false,
+            count: 50,
+            title: "",
+            label: ["", ""],
+            price: 0
         }
     },
 
@@ -49,6 +57,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
     changeRuns: (value: IRuns) => set((state) => ({ data: { ...state.data, runs: value } })),
     changeDifficulty: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, difficulty: value } })),
     changeCalculator: (value: boolean) => set((state) => ({ data: { ...state.data, hideCalculator: value } })),
+    changeLevel: (value: ILevel) => set((state) => ({ data: { ...state.data, level: value } })),
 })))
 
 export default useAdminStore

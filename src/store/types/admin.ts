@@ -25,6 +25,15 @@ export type IRuns = {
     title: string
     count: number,
     label: string
+    price: number
+}
+
+export type ILevel = {
+    hidden: boolean,
+    title: string
+    count: number,
+    label: string[],
+    price: number
 }
 
 export default interface State {
@@ -38,6 +47,7 @@ export default interface State {
         service: IService
         runs: IRuns,
         difficulty: IPlatform_Service
+        level: ILevel
     }
 
     changeActivePage: (value: string) => void
@@ -50,4 +60,5 @@ export default interface State {
     changeRuns: (value: IRuns) => void
     changeDifficulty: (value: IPlatform_Service) => void
     changeCalculator: (value: boolean) => void
+    changeLevel: (value: ILevel) => void
 }

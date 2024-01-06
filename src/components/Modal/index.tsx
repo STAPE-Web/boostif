@@ -21,6 +21,8 @@ const Modal = () => {
     const [difficultyTitle, setTitleDifficulty] = useState("")
     const [difficultyHidden, setHiddenDifficulty] = useState(false)
 
+    const [levelHidden, setHiddenLevel] = useState(false)
+
     const details = useAdminStore(state => state.data.details)
     const changeDetails = useAdminStore(state => state.changeDetails)
     const requirements = useAdminStore(state => state.data.requirements)
@@ -35,9 +37,11 @@ const Modal = () => {
     const changeDifficulty = useAdminStore(state => state.changeDifficulty)
     const hideCalc = useAdminStore(state => state.data.hideCalculator)
     const changeCalculator = useAdminStore(state => state.changeCalculator)
+    const level = useAdminStore(state => state.data.level)
+    const changeLevel = useAdminStore(state => state.changeLevel)
 
     const [tab, setTab] = useState("Details")
-    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Difficulty"]
+    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Difficulty", "Level"]
 
     useEffect(() => {
         setTitlePlatform(platform.title)
@@ -48,6 +52,8 @@ const Modal = () => {
 
         setTitleDifficulty(difficulty.title)
         setHiddenDifficulty(difficulty.hidden)
+
+        setHiddenLevel(level.hidden)
 
         setCalculatorHidden(hideCalc)
     }, [platform, service, difficulty, hideCalc])
@@ -101,8 +107,19 @@ const Modal = () => {
         const newData = { ...runs }
         if (state === "title") newData.title = e.target.value;
         if (state === "count") newData.count = Number(e.target.value);
+        if (state === "price") newData.price = Number(e.target.value);
         if (state === "label") newData.label = e.target.value;
         changeRuns(newData)
+    };
+
+    const handleLevel = (e: ChangeEvent<HTMLInputElement>, state: string, index?: number) => {
+        const newData = { ...level }
+        if (state === "title") newData.title = e.target.value;
+        if (state === "count") newData.count = Number(e.target.value);
+        if (state === "price") newData.price = Number(e.target.value);
+        if (state === "label" && index !== undefined) newData.label[index] = e.target.value;
+        console.log(newData)
+        changeLevel(newData)
     };
 
     function fillTabs() {
@@ -188,6 +205,7 @@ const Modal = () => {
                 <Input label="" onChange={e => handleRuns(e, "title")} placeholder={"Runs Title"} type="text" value={runs.title} />
                 <Input label="" onChange={e => handleRuns(e, "label")} placeholder={"Runs Label"} type="text" value={runs.label} />
                 <Input label="Runs Max Count" onChange={e => handleRuns(e, "count")} placeholder={""} type="number" value={runs.count} />
+                <Input label="1 Run Price" onChange={e => handleRuns(e, "price")} placeholder={""} type="number" value={runs.price} />
             </>
 
             case "Difficulty": return <>
@@ -215,6 +233,19 @@ const Modal = () => {
                     <AddIcon />
                 </button>
             </>
+            case "Level": return <>
+                <div className={styles.Row2}>
+                    <h2>{tab}</h2>
+                    <Toggle state={levelHidden} onChange={() => setHiddenLevel(!levelHidden)} />
+                </div>
+                <Input label="" onChange={e => handleLevel(e, "title")} placeholder={"Level Title"} type="text" value={level.title} />
+                <div className={styles.Row}>
+                    <Input label="" onChange={e => handleLevel(e, "label", 0)} placeholder={"Level Label"} type="text" value={level.label[0]} />
+                    <Input label="" onChange={e => handleLevel(e, "label", 1)} placeholder={"Level Label"} type="text" value={level.label[1]} />
+                </div>
+                <Input label="Level Max Count" onChange={e => handleLevel(e, "count")} placeholder={""} type="number" value={level.count} />
+                <Input label="Level Price" onChange={e => handleLevel(e, "price")} placeholder={""} type="number" value={level.price} />
+            </>
         }
     }
 
@@ -237,8 +268,10 @@ const Modal = () => {
             title: difficultyTitle
         })
 
+        changeLevel({ ...level, hidden: levelHidden })
+
         changeCalculator(calculatorHidden)
-    }, [platformHidden, platformTitle, serviceTitle, serviceHidden, calculatorHidden, difficultyHidden, difficultyTitle])
+    }, [platformHidden, platformTitle, serviceTitle, serviceHidden, calculatorHidden, difficultyHidden, difficultyTitle, levelHidden])
 
     return (
         <>

@@ -82,3 +82,19 @@ html {
   color: rgba(255, 255, 255, 0.5);
   font-size: 16px;
 }
+
+.multi-range-slider .caption {
+  display: none !important;
+}
+
+.multi-range-slider .bar-left,
+.multi-range-slider .bar-inner,
+.multi-range-slider .bar-right {
+  box-shadow: none;
+  border: none;
+}
+
+.multi-range-slider .thumb::before {
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
+  border-color: #564FFF;
+}
