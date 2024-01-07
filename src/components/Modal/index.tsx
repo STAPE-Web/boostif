@@ -130,11 +130,11 @@ const Modal = () => {
         switch (tab) {
             case "Details": return <Details tab={tab} handleDetails={handleDetails} />
             case "Requirements": return <Requirements tab={tab} handleRequirements={handleRequirements} />
-            case "Platform": return <Platform tab={tab} platformHidden platformTitle={platformTitle} handlePlatform={handlePlatform} setHiddenPlatform={setHiddenPlatform} setTitlePlatform={setTitlePlatform} />
-            case "Service": return <Service handleService={handleService} tab={tab} serviceHidden serviceTitle={serviceTitle} setHiddenService={setHiddenService} setTitleService={setTitleService} />
-            case "Runs": return <Runs handleRuns={handleRuns} calculatorHidden setCalculatorHidden={setCalculatorHidden} tab={tab} />
-            case "Difficulty": return <Difficulty handleDifficulty={handleDifficulty} difficultyHidden difficultyTitle={difficultyTitle} setHiddenDifficulty={setHiddenDifficulty} setTitleDifficulty={setTitleDifficulty} tab={tab} />
-            case "Level": return <Level handleLevel={handleLevel} levelHidden setHiddenLevel={setHiddenLevel} tab={tab} />
+            case "Platform": return <Platform tab={tab} platformHidden={platformHidden} platformTitle={platformTitle} handlePlatform={handlePlatform} setHiddenPlatform={setHiddenPlatform} setTitlePlatform={setTitlePlatform} />
+            case "Service": return <Service handleService={handleService} tab={tab} serviceHidden={serviceHidden} serviceTitle={serviceTitle} setHiddenService={setHiddenService} setTitleService={setTitleService} />
+            case "Runs": return <Runs handleRuns={handleRuns} calculatorHidden={calculatorHidden} setCalculatorHidden={setCalculatorHidden} tab={tab} />
+            case "Difficulty": return <Difficulty handleDifficulty={handleDifficulty} difficultyHidden={difficultyHidden} difficultyTitle={difficultyTitle} setHiddenDifficulty={setHiddenDifficulty} setTitleDifficulty={setTitleDifficulty} tab={tab} />
+            case "Level": return <Level handleLevel={handleLevel} levelHidden={levelHidden} setHiddenLevel={setHiddenLevel} tab={tab} />
         }
     }
 
