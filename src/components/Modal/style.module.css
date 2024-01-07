@@ -14,7 +14,7 @@
 
 .Box {
     background: #1E1F39;
-    max-width: 700px;
+    max-width: 800px;
     width: 100%;
     border-radius: 20px;
     padding: 25px;
@@ -39,6 +39,7 @@
 
 .Tabs::-webkit-scrollbar {
     height: 5px;
+    display: none;
 }
 
 .Tabs div {
@@ -64,6 +65,12 @@
     gap: 5px;
 }
 
+.Content p {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .7);
+}
+
 .Row2 {
     display: flex;
     align-items: center;
@@ -75,6 +82,21 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+}
+
+.Row3 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.Row3 .DeleteIcon {
+    margin-top: 15px;
+}
+
+.SelectBox {
+    margin-top: 5px;
 }
 
 .DeleteIcon {
@@ -101,4 +123,26 @@
 .ButtonUpdate svg {
     width: 20px;
     height: 20px;
+}
+
+.Scroll {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 500px;
+    overflow-y: scroll;
+    padding-right: 15px;
+}
+
+.Scroll.HideScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.Icon {
+    min-width: 25px;
+    height: 25px;
+    color: #fff;
+    cursor: pointer;
+    margin: 15px 10px 0 10px;
 }

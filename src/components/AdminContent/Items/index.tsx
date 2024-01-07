@@ -118,7 +118,7 @@ const Items = () => {
                     changeService(res.data.service)
                 } else {
                     changeService({
-                        ...res.data.service, array: [{ name: "", price: [0, 0, 0] }]
+                        ...res.data.service, array: [{ name: "", price: [0, 0, 0], class: [] }]
                     })
                 }
             }
@@ -148,7 +148,7 @@ const Items = () => {
                 title: "",
                 hidden: false,
                 array: [
-                    { name: "", price: [0, 0, 0] }
+                    { name: "", price: [0, 0, 0], class: [] }
                 ]
             })
             changeRuns({
@@ -201,7 +201,7 @@ const Items = () => {
                 title: "",
                 hidden: false,
                 array: [
-                    { name: "", price: [0, 0, 0] }
+                    { name: "", price: [0, 0, 0], class: [] }
                 ]
             })
             changeRuns({

@@ -31,7 +31,7 @@ const Order: FC<Props> = ({ data }) => {
                     + (data?.data.level !== undefined && data?.data.level.hidden ? Math.abs(level[1] - level[0]) * (data?.data.level.price !== undefined ? data?.data.level.price : 0) : 0)
                     + (value?.price || 0)
                     + (difficulty?.price || 0)
-                    + (data?.data.runs.price !== undefined ? runs * data?.data.runs.price : 0)
+                    + (data?.data.runs !== undefined ? runs * data?.data.runs.price || 0 : 0)
                 )
             );
         }
@@ -57,7 +57,10 @@ const Order: FC<Props> = ({ data }) => {
 
                 {data?.data.service !== undefined && data.data.service.hidden && <>
                     {data?.data.service.title !== undefined && <h3>{data?.data.service.title}</h3>}
-                    {data?.data.service.array !== undefined && <CheckboxesList array={data?.data.service.array} setValue={setCheck} value={check} />}
+                    {data?.data.service.array !== undefined && <CheckboxesList array={data?.data.difficulty.hidden
+                        ? difficulty !== null ? data?.data.service.array.filter(i => i.class.includes(difficulty?.name)) : []
+                        : data?.data.service.array
+                    } setValue={setCheck} value={check} />}
                 </>}
 
                 {data?.data.runs !== undefined && data?.data.hideCalculator && <>

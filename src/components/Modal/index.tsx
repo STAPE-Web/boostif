@@ -1,10 +1,14 @@
-import Input from "@/ui/Input"
 import styles from "./style.module.css"
 import useAdminStore from "@/store/admin"
 import { ChangeEvent, useEffect, useState } from "react"
 import Button from "@/ui/Buttons/Default"
-import Toggle from "../Toggle"
-import { AddIcon, DeleteIcon } from "@/ui/Icons"
+import Details from "./Modes/Details"
+import Requirements from "./Modes/Requirements"
+import Platform from "./Modes/Platform"
+import Service from "./Modes/Service"
+import Runs from "./Modes/Runs"
+import Difficulty from "./Modes/Difficulty"
+import Level from "./Modes/Level"
 
 const Modal = () => {
     const modal = useAdminStore(state => state.modal)
@@ -124,128 +128,13 @@ const Modal = () => {
 
     function fillTabs() {
         switch (tab) {
-            case "Details": return <>
-                <h2>{tab}</h2>
-                {details.map((item, index) => (
-                    <div key={index} className={styles.Row2}>
-                        <Input key={index} label="" onChange={e => handleDetails(e, index)} placeholder="Detail Name" type="text" value={item} />
-                        <DeleteIcon className={styles.DeleteIcon} onClick={() => changeDetails(details.filter((_, id) => id !== index))} />
-                    </div>
-                ))}
-                <button className={styles.ButtonUpdate} onClick={() => changeDetails([...details, ""])}>
-                    <AddIcon />
-                </button>
-            </>
-
-            case "Requirements": return <>
-                <h2>{tab}</h2>
-                {requirements.map((item, index) => (
-                    <div key={index} className={styles.Row2}>
-                        <Input label="" onChange={e => handleRequirements(e, index)} placeholder="Requirement Name" type="text" value={item} />
-                        <DeleteIcon className={styles.DeleteIcon} onClick={() => changeRequirements(requirements.filter((_, id) => id !== index))} />
-                    </div>
-                ))}
-                <button className={styles.ButtonUpdate} onClick={() => changeRequirements([...requirements, ""])}>
-                    <AddIcon />
-                </button>
-            </>
-
-            case "Platform": return <>
-                <div className={styles.Row2}>
-                    <h2>{tab}</h2>
-                    <Toggle state={platformHidden} onChange={() => setHiddenPlatform(!platformHidden)} />
-                </div>
-
-                <Input label="" onChange={e => setTitlePlatform(e.target.value)} placeholder={"Platform Title"} type="text" value={platformTitle} />
-
-                {platform.array.map((item, index) => (
-                    <div className={styles.Row} key={index}>
-                        <Input label="" onChange={() => ({})} placeholder={item.name} type="text" value={item.name} />
-                        <Input label="" onChange={e => handlePlatform(e, index, "price")} placeholder="Price" type="number" value={item.price} />
-                        <Toggle state={item.hidden} onChange={(e: any) => handlePlatform(e, index, "hidden")} />
-                    </div>
-                ))}
-            </>
-
-            case "Service": return <>
-                <div className={styles.Row2}>
-                    <h2>{tab}</h2>
-                    <Toggle state={serviceHidden} onChange={() => setHiddenService(!serviceHidden)} />
-                </div>
-
-                <Input label="" onChange={e => setTitleService(e.target.value)} placeholder={"Service Title"} type="text" value={serviceTitle} />
-
-                {service.array.map((item, index) => (
-                    <div className={styles.Row} key={index}>
-                        <Input label="" onChange={e => handleService(e, index, "name")} placeholder={"Service Name"} type="text" value={item.name} />
-                        <div className={styles.Row}>
-                            {item.price.map((price, i) => (
-                                <Input key={i} label="" onChange={e => handleService(e, index, "price", i)} placeholder="Price" type="number" value={price} />
-                            ))}
-                        </div>
-                        <DeleteIcon className={styles.DeleteIcon} onClick={() => changeService({
-                            hidden: service.hidden, title: service.title,
-                            array: service.array.filter((_, id) => id !== index)
-                        })} />
-                    </div>
-                ))}
-                <button className={styles.ButtonUpdate} onClick={() => changeService({
-                    hidden: service.hidden, title: service.title,
-                    array: [...service.array, { name: "", price: [0, 0, 0] }]
-                })}>
-                    <AddIcon />
-                </button>
-            </>
-
-            case "Runs": return <>
-                <div className={styles.Row2}>
-                    <h2>{tab}</h2>
-                    <Toggle state={calculatorHidden} onChange={() => setCalculatorHidden(!calculatorHidden)} />
-                </div>
-                <Input label="" onChange={e => handleRuns(e, "title")} placeholder={"Runs Title"} type="text" value={runs.title} />
-                <Input label="" onChange={e => handleRuns(e, "label")} placeholder={"Runs Label"} type="text" value={runs.label} />
-                <Input label="Runs Max Count" onChange={e => handleRuns(e, "count")} placeholder={""} type="number" value={runs.count} />
-                <Input label="1 Run Price" onChange={e => handleRuns(e, "price")} placeholder={""} type="number" value={runs.price} />
-            </>
-
-            case "Difficulty": return <>
-                <div className={styles.Row2}>
-                    <h2>{tab}</h2>
-                    <Toggle state={difficultyHidden} onChange={() => setHiddenDifficulty(!difficultyHidden)} />
-                </div>
-
-                <Input label="" onChange={e => setTitleDifficulty(e.target.value)} placeholder={"Difficulty Title"} type="text" value={difficultyTitle} />
-
-                {difficulty.array.map((item, index) => (
-                    <div className={styles.Row} key={index}>
-                        <Input label="" onChange={e => handleDifficulty(e, index, "name")} placeholder={"Difficulty Name"} type="text" value={item.name} />
-                        <Input label="" onChange={e => handleDifficulty(e, index, "price")} placeholder="Price" type="number" value={item.price} />
-                        <DeleteIcon className={styles.DeleteIcon} onClick={() => changeDifficulty({
-                            hidden: difficulty.hidden, title: difficulty.title,
-                            array: difficulty.array.filter((_, id) => id !== index)
-                        })} />
-                    </div>
-                ))}
-                <button className={styles.ButtonUpdate} onClick={() => changeDifficulty({
-                    hidden: difficulty.hidden, title: difficulty.title,
-                    array: [...difficulty.array, { name: "", price: 0 }]
-                })}>
-                    <AddIcon />
-                </button>
-            </>
-            case "Level": return <>
-                <div className={styles.Row2}>
-                    <h2>{tab}</h2>
-                    <Toggle state={levelHidden} onChange={() => setHiddenLevel(!levelHidden)} />
-                </div>
-                <Input label="" onChange={e => handleLevel(e, "title")} placeholder={"Level Title"} type="text" value={level.title} />
-                <div className={styles.Row}>
-                    <Input label="" onChange={e => handleLevel(e, "label", 0)} placeholder={"Level Label"} type="text" value={level.label[0]} />
-                    <Input label="" onChange={e => handleLevel(e, "label", 1)} placeholder={"Level Label"} type="text" value={level.label[1]} />
-                </div>
-                <Input label="Level Max Count" onChange={e => handleLevel(e, "count")} placeholder={""} type="number" value={level.count} />
-                <Input label="Level Price" onChange={e => handleLevel(e, "price")} placeholder={""} type="number" value={level.price} />
-            </>
+            case "Details": return <Details tab={tab} handleDetails={handleDetails} />
+            case "Requirements": return <Requirements tab={tab} handleRequirements={handleRequirements} />
+            case "Platform": return <Platform tab={tab} platformHidden platformTitle={platformTitle} handlePlatform={handlePlatform} setHiddenPlatform={setHiddenPlatform} setTitlePlatform={setTitlePlatform} />
+            case "Service": return <Service handleService={handleService} tab={tab} serviceHidden serviceTitle={serviceTitle} setHiddenService={setHiddenService} setTitleService={setTitleService} />
+            case "Runs": return <Runs handleRuns={handleRuns} calculatorHidden setCalculatorHidden={setCalculatorHidden} tab={tab} />
+            case "Difficulty": return <Difficulty handleDifficulty={handleDifficulty} difficultyHidden difficultyTitle={difficultyTitle} setHiddenDifficulty={setHiddenDifficulty} setTitleDifficulty={setTitleDifficulty} tab={tab} />
+            case "Level": return <Level handleLevel={handleLevel} levelHidden setHiddenLevel={setHiddenLevel} tab={tab} />
         }
     }
 

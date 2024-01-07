@@ -7,6 +7,7 @@ export type IArray = {
 export type IArray2 = {
     name: string
     price: number[],
+    class: string[]
 }
 
 export type IPlatform_Service = {

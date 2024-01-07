@@ -22,7 +22,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
             title: "",
             hidden: false,
             array: [
-                { name: "", price: [0, 0, 0] }
+                { name: "", price: [0, 0, 0], class: [] }
             ]
         },
         runs: {
