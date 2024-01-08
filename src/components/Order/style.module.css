@@ -37,6 +37,19 @@
     width: 100%;
 }
 
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Row h4 {
+    font-size: 20px;
+    color: #646571;
+    text-decoration: line-through;
+}
+
 @media screen and (max-width: 950px) {
     .Order {
         max-width: 100%;

@@ -1,6 +1,7 @@
 import Input from '@/ui/Input'
 import { useState, useCallback, useEffect } from 'react'
 import API from '@/api/items'
+import APIGame from "@/api/games"
 import { IService } from '@/types'
 import styles from './style.module.css'
 import useAdminStore from '@/store/admin'
@@ -9,10 +10,15 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from "@/firebase"
 import { useNavigate } from 'react-router-dom'
 import TextEditor from '@/components/TextEditor'
+import SelectSections from '@/ui/SelectSections'
 
 const Items = () => {
     const [create, setCreate] = useState(false)
+    const [sections, setSections] = useState(false)
+    const [section, setSection] = useState("")
+
     const [data, setData] = useState<IService[]>([])
+    const [game, setGame] = useState<string[]>([])
     const activePage = useAdminStore(state => state.activePage)
     const [image, setImage] = useState<any>([])
     const [imagePath, setImagePath] = useState("")
@@ -26,6 +32,7 @@ const Items = () => {
     const [updateId, setUpdateId] = useState("")
     const [updateTitle, setUpdateTitle] = useState("")
     const [updatePrice, setUpdatePrice] = useState("")
+    const [updateOldPrice, setUpdateOldPrice] = useState("")
     const [updateDescription, setUpdateDescription] = useState("")
 
     const additionalData = useAdminStore(state => state.data)
@@ -38,7 +45,7 @@ const Items = () => {
     const changeCalculator = useAdminStore(state => state.changeCalculator)
     const changeDifficulty = useAdminStore(state => state.changeDifficulty)
     const changeLevel = useAdminStore(state => state.changeLevel)
-
+    const changeSection = useAdminStore(state => state.changeSection)
 
     function AdditionalSettings() {
         changeModal(true)
@@ -52,9 +59,16 @@ const Items = () => {
         setData(res)
     }, [API, activePage])
 
+    const getGame = useCallback(async () => {
+        setGame([])
+        const res = await APIGame.getOne(activePage)
+        setGame(res.data.sections)
+    }, [APIGame, activePage])
+
     useEffect(() => {
         getReviews()
-    }, [getReviews])
+        getGame()
+    }, [getReviews, getGame])
 
     async function createReview() {
         const res = await API.create(title, price, description, details, requirements, activePage, imagePath)
@@ -68,6 +82,23 @@ const Items = () => {
             setRequirements([])
             setImagePath("")
             setImage([])
+        }
+    }
+
+    async function createSection() {
+        const newArray = [...game, section]
+        const res = await APIGame.update(activePage, { sections: newArray })
+        if (res) {
+            setSection("")
+            getGame()
+        }
+    }
+
+    async function deleteSection(name: string) {
+        const newArray = game.filter(i => !i.includes(name))
+        const res = await APIGame.update(activePage, { sections: newArray })
+        if (res) {
+            getGame()
         }
     }
 
@@ -104,8 +135,10 @@ const Items = () => {
     async function updateHandler(id: string) {
         if (id !== "") {
             const res: IService = await API.getOne(id)
+            changeSection(res.data.section)
             setUpdateTitle(res.data.name)
             setUpdatePrice(res.data.price)
+            setUpdateOldPrice(res.data.oldPrice || "")
             setUpdateDescription(res.data.description)
             setUpdateId(id)
             setImagePath(res.data.image)
@@ -129,12 +162,14 @@ const Items = () => {
         } else {
             setUpdateTitle("")
             setUpdatePrice("")
+            setUpdateOldPrice("")
             setUpdateDescription("")
             setImagePath("")
             setImage([])
             setUpdateId(id)
             changeDetails([""])
             changeRequirements([""])
+            changeSection("")
             changePlatform({
                 title: "",
                 hidden: false,
@@ -176,11 +211,12 @@ const Items = () => {
     }
 
     async function updateReview() {
-        const data = await API.update(updateId, updateTitle, updatePrice, updateDescription, imagePath, additionalData)
+        const data = await API.update(updateId, updateTitle, updatePrice, updateOldPrice, updateDescription, imagePath, additionalData)
         if (data) {
             getReviews()
             setUpdateTitle("")
             setUpdatePrice("")
+            setUpdateOldPrice("")
             setUpdateDescription("")
             setUpdateId("")
             setImagePath("")
@@ -188,6 +224,7 @@ const Items = () => {
             changeModal(false)
             changeDetails([""])
             changeRequirements([""])
+            changeSection("")
             changePlatform({
                 title: "",
                 hidden: false,
@@ -231,9 +268,20 @@ const Items = () => {
     return (
         <section className={styles.Module}>
             <div className={styles.CreationBox}>
-                <button className={`${styles.Button} ${styles.Outline}`} onClick={() => setCreate(!create)}>{create ? "Close creation" : `Create service`}</button>
+                <div className={styles.RowBox}>
+                    <button className={styles.Button} onClick={() => {
+                        setCreate(!create)
+                        setSections(false)
+                    }}>{create ? "Close Creation" : `Create Service`}</button>
+                    <button className={`${styles.Button} ${styles.Outline}`} onClick={() => {
+                        setSections(!sections)
+                        setCreate(false)
+                    }}>{sections ? "Close" : `Manage Sections`}</button>
+                </div>
+
                 {create &&
                     <div className={styles.Form}>
+                        <h2>Create Service</h2>
                         <input className={styles.UploadInput} id='upload' type="file" onChange={e => setImage(e.target.files)} />
                         <label htmlFor="upload" className={styles.Button}>
                             {image.length !== 0
@@ -247,11 +295,17 @@ const Items = () => {
                         </label>
                         <Input label='' type="text" placeholder={"Enter service Name"} onChange={e => setTitle(e.target.value)} value={title} />
                         <Input label='' type="text" placeholder={"Enter service Price"} onChange={e => setPrice(e.target.value)} value={price} />
-                        {/* <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setDescription(e.target.value)} value={description} /> */}
                         <TextEditor big={false} value={description} onChange={setDescription} />
                         <button className={styles.Button} onClick={() => createReview()} disabled={title === ""}>Create</button>
                     </div>
                 }
+
+                {sections && <div className={styles.Form}>
+                    <h2>Manage Sections</h2>
+                    {game.length !== 0 && <SelectSections deleteSection={deleteSection} array={game} />}
+                    <Input label='Create New Section' onChange={e => setSection(e.target.value)} placeholder='Enter Section Name' type='text' value={section} />
+                    <button className={styles.Button} onClick={() => createSection()} disabled={section === ""}>Create</button>
+                </div>}
             </div>
 
             <div className={styles.List}>
@@ -292,8 +346,8 @@ const Items = () => {
                                 <button className={`${styles.Button} ${styles.Outline}`} onClick={() => AdditionalSettings()}>+ Additional settings</button>
                             </div>
                             <Input label='' type="text" placeholder={"Enter service Name"} onChange={e => setUpdateTitle(e.target.value)} value={updateTitle} />
-                            <Input label='' type="text" placeholder={"Enter service Price"} onChange={e => setUpdatePrice(e.target.value)} value={updatePrice} />
-                            {/* <Input label='' type="text" placeholder={"Enter service Description"} onChange={e => setUpdateDescription(e.target.value)} value={updateDescription} /> */}
+                            <Input label='' type="number" placeholder={"Enter service Price"} onChange={e => setUpdatePrice(e.target.value)} value={updatePrice} />
+                            <Input label='' type="number" placeholder={"Enter old service Price"} onChange={e => setUpdateOldPrice(e.target.value)} value={updateOldPrice} />
                             <TextEditor big={false} value={updateDescription} onChange={setUpdateDescription} />
                             <div className={styles.Row}>
                                 <button className={styles.Button} onClick={() => updateReview()} disabled={updateTitle === ""}>Update</button>

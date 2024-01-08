@@ -1,0 +1,75 @@
+.Module {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Select {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.10);
+    padding: 0 15px;
+    gap: 10px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.Select .Icon {
+    width: 25px;
+    height: 25px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.Select p {
+    color: #fff;
+}
+
+.DropDown {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.DropDown .Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45px;
+    padding: 0 15px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+}
+
+.DropDown .Item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.CheckIcon {
+    width: 15px;
+    height: 15px;
+}
+
+.Checked {
+    opacity: 0;
+    transition: 0.5s;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #564FFF;
+    border-radius: 100%;
+}
+
+.Checked.Active {
+    opacity: 1;
+}

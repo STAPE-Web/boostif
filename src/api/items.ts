@@ -35,10 +35,11 @@ class API {
         }).then((res) => res.data)
     }
 
-    async update(id: string, title: string, price: string, description: string, imagePath: string, additionalData: IAdditional) {
+    async update(id: string, title: string, price: string, oldPrice: string, description: string, imagePath: string, additionalData: IAdditional) {
         return await axios.put(`${import.meta.env.VITE_SERVER}/items/update`, {
             id,
             name: title,
+            oldPrice,
             price, description: description || "",
             image: imagePath,
             additionalData

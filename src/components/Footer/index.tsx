@@ -17,6 +17,42 @@ const Footer = () => {
         { id: 5, link: '', icon: TwitterIcon },
     ]
 
+    const links = [
+        [
+            { link: "/terms", name: "Terms & Conditions" },
+            { link: "/privacy", name: "Privacy Policy" },
+            { link: "/contact", name: "Contact Us" },
+            { link: "/cookie", name: "Cookie Policy" },
+            { link: "/refund", name: "Refund Policy" },
+            { link: "/work", name: "Work with us" },
+        ],
+        [
+            { link: "/catalog/1", name: "Diablo 4" },
+            { link: "/catalog/2", name: "WoW Dragonflight" },
+            { link: "/catalog/3", name: "WoW Classic Hardcore" },
+            { link: "/catalog/4", name: "WoW WotLK" },
+            { link: "/catalog/5", name: "Destiny 2" },
+        ],
+        [
+            { link: "/catalog/6", name: "The Elder Scrolls Online" },
+            { link: "/catalog/7", name: "Escape from Tarkov" },
+            { link: "/catalog/8", name: "Valorant" },
+            { link: "/catalog/9", name: "Apex Legends" },
+            { link: "/catalog/10", name: "League Of Legends" },
+        ],
+        [
+            { link: "/catalog/11", name: "Overwatch 2" },
+            { link: "/catalog/12", name: "FIFA 24" },
+            { link: "/catalog/13", name: "Final Fantasy XIV" },
+            { link: "/catalog/14", name: "Lost Ark" },
+            { link: "/catalog/15", name: "New World" },
+        ],
+        [
+            { link: "/catalog/16", name: "GTA 5 Online" },
+            { link: "/catalog/17", name: "Path of Exile" },
+        ],
+    ]
+
     return (
         <>
             {headerShown && <>
@@ -35,43 +71,13 @@ const Footer = () => {
                         </div>
 
                         <div className={styles.Bottom}>
-                            <ul>
-                                <Link to="/terms"><li>Terms & Conditions</li></Link>
-                                <Link to="/privacy"><li>Privacy Policy</li></Link>
-                                <Link to="/contact"><li>Contact Us</li></Link>
-                                <Link to="/cookie"><li>Cookie Policy</li></Link>
-                                <Link to="/refund"><li>Refund Policy</li></Link>
-                                <Link to="/work"><li>Work with us</li></Link>
-                            </ul>
-
-                            <ul>
-                                <li>Diablo 4</li>
-                                <li>WoW Dragonflight</li>
-                                <li>WoW Classic Hardcore</li>
-                                <li>WoW WotLK</li>
-                                <li>Destiny 2</li>
-                            </ul>
-
-                            <ul>
-                                <li>The Elder Scrolls Online</li>
-                                <li>Escape from Tarkov</li>
-                                <li>Valorant</li>
-                                <li>Apex Legends</li>
-                                <li>League Of Legends</li>
-                            </ul>
-
-                            <ul>
-                                <li>Overwatch 2</li>
-                                <li>FIFA 24</li>
-                                <li>Final Fantasy XIV</li>
-                                <li>Lost Ark</li>
-                                <li>New World</li>
-                            </ul>
-
-                            <ul>
-                                <li>GTA 5 Online</li>
-                                <li>Path of Exile</li>
-                            </ul>
+                            {links.map((link, index) => (
+                                <ul key={index}>
+                                    {link.map((l, i) => (
+                                        <Link key={i} to={l.link}><li>{l.name}</li></Link>
+                                    ))}
+                                </ul>
+                            ))}
                         </div>
                     </div>
                 </footer>}

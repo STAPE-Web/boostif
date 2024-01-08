@@ -46,6 +46,7 @@ export type IGame = {
         image: string
         name: string
         text: string
+        sections: string[]
     }
 }
 
@@ -57,6 +58,7 @@ type IArray = {
 export type IService = {
     id: string,
     data: {
+        section: string
         image: string
         name: string
         backgroundImage: string
@@ -64,6 +66,7 @@ export type IService = {
         details: string[]
         requirements: string[]
         price: string
+        oldPrice: string
         description: string
         platform: {
             title: string

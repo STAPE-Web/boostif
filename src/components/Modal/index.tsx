@@ -9,6 +9,7 @@ import Service from "./Modes/Service"
 import Runs from "./Modes/Runs"
 import Difficulty from "./Modes/Difficulty"
 import Level from "./Modes/Level"
+import Sections from "./Modes/Sections"
 
 const Modal = () => {
     const modal = useAdminStore(state => state.modal)
@@ -45,7 +46,7 @@ const Modal = () => {
     const changeLevel = useAdminStore(state => state.changeLevel)
 
     const [tab, setTab] = useState("Details")
-    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Difficulty", "Level"]
+    const tabs = ["Details", "Requirements", "Platform", "Service", "Runs", "Difficulty", "Level", "Sections"]
 
     useEffect(() => {
         setTitlePlatform(platform.title)
@@ -135,6 +136,7 @@ const Modal = () => {
             case "Runs": return <Runs handleRuns={handleRuns} calculatorHidden={calculatorHidden} setCalculatorHidden={setCalculatorHidden} tab={tab} />
             case "Difficulty": return <Difficulty handleDifficulty={handleDifficulty} difficultyHidden={difficultyHidden} difficultyTitle={difficultyTitle} setHiddenDifficulty={setHiddenDifficulty} setTitleDifficulty={setTitleDifficulty} tab={tab} />
             case "Level": return <Level handleLevel={handleLevel} levelHidden={levelHidden} setHiddenLevel={setHiddenLevel} tab={tab} />
+            case "Sections": return <Sections tab={tab} />
         }
     }
 

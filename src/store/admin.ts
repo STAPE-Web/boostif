@@ -6,6 +6,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
     activePage: "1",
     modal: false,
     data: {
+        section: "",
         hideCalculator: false,
         details: [],
         requirements: [],
@@ -58,6 +59,7 @@ const useAdminStore = create<State>()(devtools((set) => ({
     changeDifficulty: (value: IPlatform_Service) => set((state) => ({ data: { ...state.data, difficulty: value } })),
     changeCalculator: (value: boolean) => set((state) => ({ data: { ...state.data, hideCalculator: value } })),
     changeLevel: (value: ILevel) => set((state) => ({ data: { ...state.data, level: value } })),
+    changeSection: (value: string) => set((state) => ({ data: { ...state.data, section: value } })),
 })))
 
 export default useAdminStore

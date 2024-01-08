@@ -19,6 +19,7 @@ const Order: FC<Props> = ({ data }) => {
     const [runs, setRuns] = useState(1)
     const [level, setLevel] = useState([1, 2])
     const [price, setPrice] = useState(0)
+    const [oldPrice, setOldPrice] = useState(0)
 
     const platforms = ["PC", "Xbox", "PS"]
 
@@ -34,6 +35,15 @@ const Order: FC<Props> = ({ data }) => {
                     + (data?.data.runs !== undefined ? runs * data?.data.runs.price || 0 : 0)
                 )
             );
+
+            setOldPrice((Number(data?.data.oldPrice)
+                + (check.reduce((acc, number) => acc
+                    + (data?.data.platform !== undefined ? number.price[data.data.platform.hidden ? platforms.findIndex(i => i === value?.name) : 0] : 0), 0))
+                + (data?.data.level !== undefined && data?.data.level.hidden ? Math.abs(level[1] - level[0]) * (data?.data.level.price !== undefined ? data?.data.level.price : 0) : 0)
+                + (value?.price || 0)
+                + (difficulty?.price || 0)
+                + (data?.data.runs !== undefined ? runs * data?.data.runs.price || 0 : 0)
+            ))
         }
     }, [check, runs, data, value, difficulty, level]);
 
@@ -70,7 +80,11 @@ const Order: FC<Props> = ({ data }) => {
             </div>
 
             <div className={styles.Bottom}>
-                <h2>$ {price.toFixed(2)}</h2>
+                <div className={styles.Row}>
+                    <h2>$ {price.toFixed(2)}</h2>
+                    {data?.data.oldPrice !== undefined && <h4>${oldPrice}</h4>}
+                </div>
+
                 <Button onClick={() => ({})}>Buy Now</Button>
             </div>
         </section>

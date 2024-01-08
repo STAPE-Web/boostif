@@ -108,6 +108,29 @@
     line-height: 36px;
 }
 
+.Category {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Category label {
+    color: #fff;
+    font-size: 14px;
+}
+
+.Row {
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+}
+
+.Row h4 {
+    text-decoration: line-through;
+    color: #adadad;
+}
+
 @media screen and (max-width: 1200px) {
     .Section1 {
         padding: 80px 30px;

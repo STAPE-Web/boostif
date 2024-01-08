@@ -129,6 +129,10 @@
     gap: 10px;
 }
 
+.UpdateBox input[placeholder="Enter old service Price"] {
+    text-decoration: line-through;
+}
+
 .Icon {
     width: 25px;
     height: 25px;
@@ -150,4 +154,16 @@
     height: 100px;
     object-fit: cover;
     border-radius: 30px;
+}
+
+.RowBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.CreationBox h2 {
+    font-size: 24px;
+    color: #fff;
 }

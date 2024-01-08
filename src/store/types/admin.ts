@@ -41,6 +41,7 @@ export default interface State {
     activePage: string;
     modal: boolean,
     data: {
+        section: string
         hideCalculator: boolean,
         details: string[]
         requirements: string[],
@@ -62,4 +63,5 @@ export default interface State {
     changeDifficulty: (value: IPlatform_Service) => void
     changeCalculator: (value: boolean) => void
     changeLevel: (value: ILevel) => void
+    changeSection: (value: string) => void
 }
