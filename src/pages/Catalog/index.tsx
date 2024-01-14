@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import useGlobalStore from '@/store'
 import { useNavigate, useParams } from "react-router-dom"
 import Button from '@/ui/Buttons/Default'
@@ -21,7 +21,7 @@ const Catalog = () => {
     }, [])
 
     const [data, setData] = useState<IService[]>([])
-    const [game, setGame] = useState<IGame | null>(null)
+    const [game, setGame] = useState<IGame[]>([])
 
     const getData = useCallback(async () => {
         if (id !== undefined) {
@@ -33,25 +33,52 @@ const Catalog = () => {
     const getGame = useCallback(async () => {
         if (id !== undefined) {
             const data: IGame[] = await APIGame.get()
-            const game = data.findIndex(item => item.id === id)
-            setGame(data[game])
+            setGame(data)
         }
     }, [API, id])
 
     useEffect(() => {
         getData()
         getGame()
-    }, [])
+    }, [getData])
+
+    const games = useMemo(() => {
+        const array: string[] = []
+
+        game.forEach(el => {
+            array.push(el.data.name)
+        });
+
+        return array;
+    }, [game])
+
+    const categories = useMemo(() => {
+        const currentGame = game[game.findIndex(i => i.id == id)]
+
+        if (currentGame !== undefined) {
+            return ["All", ...currentGame.data.sections]
+        }
+    }, [game, id])
+
+    function gameHendler(value: string) {
+        const selectedGame = game.find(i => i.data.name === value)
+        navigate(`/catalog/${selectedGame?.id}`)
+    }
 
     return (
         <main className={styles.Page}>
-            <section className={styles.Section1}>
-                <h1>{game?.data.name}</h1>
+            <section className={styles.Section2}>
+                {game.length !== 0 && <SelectString array={games} setValue={(value) => gameHendler(value)} value={game[game.findIndex(i => i.id === id)].data.name} />}
 
-                {game?.data.sections.length !== 0 && <div className={styles.Category}>
-                    <label>Choose category</label>
-                    {game && <SelectString array={["All", ...game?.data.sections]} setValue={(value) => setSection(value)} value={section} />}
+                {categories?.length !== 1 && <div className={styles.Categories}>
+                    {categories?.map((cat, index) => (
+                        <div key={index} onClick={() => setSection(cat)}>{cat}</div>
+                    ))}
                 </div>}
+            </section>
+
+            <section className={styles.Section1}>
+                <h1>{game[game.findIndex(i => i.id === id)]?.data.name}</h1>
 
                 <div className={styles.Grid}>
                     {data.filter(i => (

@@ -25,25 +25,24 @@ const Order: FC<Props> = ({ data }) => {
 
     useEffect(() => {
         if (data !== undefined) {
-            setPrice(
-                (Number(data?.data.price)
-                    + (check.reduce((acc, number) => acc
-                        + (data?.data.platform !== undefined ? number.price[data.data.platform.hidden ? platforms.findIndex(i => i === value?.name) : 0] : 0), 0))
-                    + (data?.data.level !== undefined && data?.data.level.hidden ? Math.abs(level[1] - level[0]) * (data?.data.level.price !== undefined ? data?.data.level.price : 0) : 0)
-                    + (value?.price || 0)
-                    + (difficulty?.price || 0)
-                    + (data?.data.runs !== undefined ? runs * data?.data.runs.price || 0 : 0)
-                )
+            setPrice(((check.reduce((acc, number) => acc
+                + (data?.data.platform !== undefined ? number.price[data.data.platform.hidden ? platforms.findIndex(i => i === value?.name) : 0] : 0), 0))
+                + (data?.data.level !== undefined && data?.data.level.hidden ? Math.abs(level[1] - level[0]) * (data?.data.level.price !== undefined ? data?.data.level.price : 0) : 0)
+                + (value?.price || 0)
+                + (difficulty?.price || 0)
+                + (data?.data.runs !== undefined && data?.data.runs.label.trim() !== "Run(s)" ? runs * data?.data.runs.price || 0 : 0)
+            ) * (runs * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
             );
 
-            setOldPrice((Number(data?.data.oldPrice)
+            setOldPrice(((Number(data?.data.oldPrice) - Number(data?.data.price))
                 + (check.reduce((acc, number) => acc
                     + (data?.data.platform !== undefined ? number.price[data.data.platform.hidden ? platforms.findIndex(i => i === value?.name) : 0] : 0), 0))
                 + (data?.data.level !== undefined && data?.data.level.hidden ? Math.abs(level[1] - level[0]) * (data?.data.level.price !== undefined ? data?.data.level.price : 0) : 0)
                 + (value?.price || 0)
                 + (difficulty?.price || 0)
-                + (data?.data.runs !== undefined ? runs * data?.data.runs.price || 0 : 0)
-            ))
+                + (data?.data.runs !== undefined && data?.data.runs.label.trim() !== "Run(s)" ? runs * data?.data.runs.price || 0 : 0)
+            ) * (runs * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
+            )
         }
     }, [check, runs, data, value, difficulty, level]);
 
@@ -81,8 +80,8 @@ const Order: FC<Props> = ({ data }) => {
 
             <div className={styles.Bottom}>
                 <div className={styles.Row}>
-                    <h2>$ {price.toFixed(2)}</h2>
-                    {data?.data.oldPrice !== undefined && <h4>${oldPrice}</h4>}
+                    <h2>$ {(!Number.isNaN(price) ? price : 0).toFixed(2)}</h2>
+                    {data?.data.oldPrice !== undefined && <h4>${(!Number.isNaN(oldPrice) ? oldPrice : 0).toFixed(2)}</h4>}
                 </div>
 
                 <Button onClick={() => ({})}>Buy Now</Button>

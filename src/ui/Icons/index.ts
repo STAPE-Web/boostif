@@ -13,6 +13,7 @@ import Send from './Send'
 import Edit from "./Edit";
 import Image from './Image'
 import Add from './Add'
+import AddGrid from './AddGrid'
 
 export {
     Search as SearchIcon,
@@ -29,5 +30,6 @@ export {
     Send as SendIcon,
     Edit as EditIcon,
     Image as ImageIcon,
-    Add as AddIcon
+    Add as AddIcon,
+    AddGrid as AddGridIcon
 }
