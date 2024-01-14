@@ -32,7 +32,7 @@ const Order: FC<Props> = ({ data }) => {
                 + (value?.price || 0)
                 + (difficulty?.price || 0)
                 + (data?.data.runs !== undefined && data?.data.runs.label.trim() !== "Run(s)" ? runs * data?.data.runs.price || 0 : 0)
-            ) * (runs * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
+            ) * (data?.data.runs.label.trim() === "Run(s)" ? runs : 1 * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
             );
 
             setOldPrice(((Number(data?.data.oldPrice) - Number(data?.data.price))
@@ -42,7 +42,7 @@ const Order: FC<Props> = ({ data }) => {
                 + (value?.price || 0)
                 + (difficulty?.price || 0)
                 + (data?.data.runs !== undefined && data?.data.runs.label.trim() !== "Run(s)" ? runs * data?.data.runs.price || 0 : 0)
-            ) * (runs * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
+            ) * (data?.data.runs.label.trim() === "Run(s)" ? runs : 1 * (data?.data.runs.label.trim() === "Run(s)" ? data?.data.runs.price : 1))
             )
         }
     }, [check, runs, data, value, difficulty, level]);
