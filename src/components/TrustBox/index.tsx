@@ -1,3 +1,4 @@
+import Trustpilot from '@/assets/Trustpilot';
 import { useEffect } from 'react';
 
 const TrustpilotWidget = () => {
@@ -13,9 +14,17 @@ const TrustpilotWidget = () => {
     }, []);
 
     return (
-        <div className="trustpilot-widget" data-locale="en-US" data-template-id="5613c9abf85e702406ab8c02" data-businessunit-id="6572fadaba14ca001bdaec13" data-style-height="130px" data-style-width="100%" data-theme="light" data-stars="4,5">
-            <a href="https://www.trustpilot.com/review/boostif.com" target="_blank" rel="noopener noreferrer">
-                <p>Hello</p>
+        <div className="Trustpilot" >
+            <a href="https://www.trustpilot.com/review/boostif.com" target="_blank" rel="noopener">
+
+                {/* <div className="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="6572f9d3caf96b587b31b8a1" data-style-height="52px" data-style-width="100%">
+                <a style={{ background: "#000!important" }} href="https://www.trustpilot.com/review/boostif.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div> */}
+
+                <div>
+                    <p>Review us on</p>
+                    <Trustpilot />
+                </div>
             </a>
         </div>
     );

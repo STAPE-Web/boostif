@@ -7,6 +7,7 @@ import { IService } from "@/types"
 import Select from "@/ui/Select"
 import { IArray, IArray2 } from "@/store/types/admin"
 import MultiSlider from "../MultiSlider"
+import axios from "axios"
 
 interface Props {
     data: IService | null
@@ -46,6 +47,19 @@ const Order: FC<Props> = ({ data }) => {
         }
     }, [check, runs, data, value, difficulty, level]);
 
+    async function Payment() {
+        const roundedPrice = Math.round(price * 100);
+        const data = await axios.post(
+            `${import.meta.env.VITE_SERVER}/payment`,
+            {
+                price: roundedPrice,
+            },
+        ).then(res => res.data);
+
+        console.log(data)
+        window.location.replace(data.session.url)
+    }
+
     return (
         <section className={styles.Order}>
             <div className={styles.Top}>
@@ -84,7 +98,7 @@ const Order: FC<Props> = ({ data }) => {
                     {data?.data.oldPrice !== undefined && <h4>${(!Number.isNaN(oldPrice) ? oldPrice : 0).toFixed(2)}</h4>}
                 </div>
 
-                <Button onClick={() => ({})}>Buy Now</Button>
+                <Button onClick={() => Payment()}>Buy Now</Button>
             </div>
         </section>
     )
