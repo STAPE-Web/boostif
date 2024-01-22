@@ -10,7 +10,7 @@ import API from "@/api/items"
 const Item = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
     const changePage = useGlobalStore(state => state.changePage)
-    const { id, serviceId } = useParams()
+    const { serviceId } = useParams()
 
     useEffect(() => {
         changeHeaderShown(true)
@@ -24,11 +24,11 @@ const Item = () => {
             const data = await API.getOne(serviceId)
             setData(data)
         }
-    }, [API, id])
+    }, [API, serviceId])
 
     useEffect(() => {
         getData()
-    }, [])
+    }, [getData])
 
     return (
         <main className={styles.Item}>

@@ -1,16 +1,13 @@
-import { FC, FormEvent, useState } from "react"
+import { FC, useState } from "react"
 import styles from './style.module.css'
 import { ArrowDownIcon, SearchIcon } from "../Icons"
-import { useNavigate } from "react-router-dom"
 
-const Search: FC = () => {
+interface Props {
+    SearchItems: (e: any) => void
+}
+
+const Search: FC<Props> = ({ SearchItems }) => {
     const [search, setSearch] = useState('')
-    const navigate = useNavigate()
-
-    function SearchItems(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        navigate(`/search?q=${search}`)
-    }
 
     return (
         <form className={styles.Search} onSubmit={e => SearchItems(e)}>

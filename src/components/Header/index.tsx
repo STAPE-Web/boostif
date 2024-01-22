@@ -17,6 +17,8 @@ const Header = () => {
     const headerShown = useGlobalStore(state => state.headerShown)
     const userId = JSON.parse(localStorage.getItem('userId') as string)
     const [data, setData] = useState<IUser | null>(null)
+    const changeModal = useGlobalStore(state => state.changeModal)
+    const modal = useGlobalStore(state => state.modal)
 
     const getUserData = useCallback(async () => {
         const res = await API.get(JSON.parse(localStorage.getItem('userId') as string))
@@ -27,16 +29,21 @@ const Header = () => {
         getUserData()
     }, [getUserData])
 
+    function SearchItems(e: any) {
+        e.preventDefault()
+        navigate(`/search?q=${e.target[0].value}`)
+    }
+
     return (
         <>
-            {headerShown && <header className={styles.Header}>
+            {headerShown && <header className={styles.Header} onClick={() => changeModal(false)}>
                 <div className={styles.LogoBox} onClick={() => navigate("/")}>
                     <img className={styles.Logo} src={Logo} alt="" />
                 </div>
 
-                <div className={styles.Controlls}>
-                    <Search />
-                    <ButtonSquare onClick={() => navigate("/search?q=")}>
+                <div className={styles.Controlls} onClick={e => e.stopPropagation()}>
+                    <Search SearchItems={SearchItems} />
+                    <ButtonSquare onClick={() => changeModal(!modal)}>
                         <FilterIcon className={styles.Icon} />
                     </ButtonSquare>
                 </div>

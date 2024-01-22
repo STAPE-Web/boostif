@@ -1,0 +1,197 @@
+.Filter {
+    width: 100%;
+    height: fit-content;
+    padding: 0 30px;
+    z-index: 1000;
+    position: fixed;
+    height: calc(100% - 150px);
+    top: 120px;
+}
+
+.Box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: #1D2227;
+    box-shadow: 0 4px 30px rgba(134, 219, 255, .4);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.Sidebar {
+    max-width: 350px;
+    width: 100%;
+    background: #14171B;
+    padding: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Sidebar form {
+    min-height: 38px;
+    margin-left: 30px;
+}
+
+.Sidebar h3 {
+    margin-left: 30px;
+}
+
+.Filter h3 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    color: #7570ff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.List {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.List div {
+    font-size: 16px;
+    min-height: 40px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: 100px;
+}
+
+.List div.Active {
+    background: #7570ff;
+}
+
+.Content {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 30px;
+}
+
+.Categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 250px;
+}
+
+.CatList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CatList div {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.CatList div:hover {
+    opacity: 0.5;
+}
+
+.Products {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.Grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.Products .Item {
+    width: 100%;
+    height: 340px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.Products .Item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.Products .Item .Box {
+    width: 100%;
+    height: 100%;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+    position: absolute;
+    background: transparent;
+}
+
+.Products .Item .Box div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.Shadow {
+    width: 100%;
+    height: 260px;
+    background: linear-gradient(180deg, rgba(20, 23, 27, 0) 0, rgba(20, 23, 27, .85) 54.69%, #14171b 95.31%);
+    position: absolute;
+    bottom: 0;
+}
+
+.Products .Item h3 {
+    font-size: 28px;
+    color: #eee;
+    line-height: 36px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.Products .Item .Box p {
+    color: #fff;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.Products .Item .Box h2 {
+    color: #564FFF;
+    font-size: 32px;
+    line-height: 36px;
+}
+
+.Row {
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+}
+
+.Row h4 {
+    text-decoration: line-through;
+    color: #adadad;
+}

@@ -1,5 +1,4 @@
 import { IGame } from '@/types'
-import Button from '@/ui/Buttons/Default'
 import { FC } from 'react'
 import styles from './style.module.css'
 import { useNavigate } from 'react-router-dom'
@@ -12,10 +11,17 @@ const Item: FC<Props> = ({ item }) => {
     const navigate = useNavigate()
 
     return (
-        <div className={styles.Item} style={{ background: `url(${import.meta.env.VITE_PUBLIC}${item.data.image}) no-repeat`, backgroundSize: 'cover' }}>
+        <div className={styles.Item} style={{ background: `url(${import.meta.env.VITE_PUBLIC}${item.data.image}) no-repeat`, backgroundSize: 'cover' }} onClick={() => navigate(`/catalog/${item.id}`)}>
             <h2>{item.data.name}</h2>
-            <p>{item.data.text}</p>
-            <Button onClick={() => navigate(`/catalog/${item.id}`)}>Order Now</Button>
+            {item.data.sections.length === 0 && <p>{item.data.text}</p>}
+
+            <div className={styles.Categories}>
+                {item.data.sections.map((i, index) => (
+                    <div key={index}>{i}</div>
+                ))}
+            </div>
+
+            {/* <Button>Order Now</Button> */}
         </div>
     )
 }
