@@ -69,7 +69,10 @@ const Filter = () => {
                                 <div className={styles.CatList}>
                                     {game.length !== 0 && <>
                                         {game[game.findIndex(i => i.id === id)].data.sections.map((section, index) => (
-                                            <div key={index}>{section}</div>
+                                            <div key={index} onClick={() => {
+                                                navigate(`/catalog/${id}?category=${section}`)
+                                                changeModal(false)
+                                            }}>{section}</div>
                                         ))}
                                     </>}
                                 </div>

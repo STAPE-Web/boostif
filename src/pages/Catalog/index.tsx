@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import useGlobalStore from '@/store'
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import Button from '@/ui/Buttons/Default'
 import { IGame, IService } from '@/types'
 import API from "@/api/items"
@@ -13,7 +13,8 @@ const Catalog = () => {
     const changePage = useGlobalStore(state => state.changePage)
     const { id } = useParams()
     const navigate = useNavigate()
-    const [section, setSection] = useState("All")
+    const [searchParams, setSearchParams] = useSearchParams()
+    const category = searchParams.get("category")
 
     useEffect(() => {
         changeHeaderShown(true)
@@ -72,7 +73,7 @@ const Catalog = () => {
 
                 {categories?.length !== 1 && <div className={styles.Categories}>
                     {categories?.map((cat, index) => (
-                        <div key={index} onClick={() => setSection(cat)}>{cat}</div>
+                        <div className={category === cat ? styles.ActiveCategory : ""} key={index} onClick={() => setSearchParams({ category: cat })}>{cat}</div>
                     ))}
                 </div>}
             </section>
@@ -82,7 +83,7 @@ const Catalog = () => {
 
                 <div className={styles.Grid}>
                     {data.filter(i => (
-                        section === "All" ? true : i.data.section === section
+                        category === "All" || category === null ? true : i.data.section === category
                     )).map(item => (
                         <div key={item.id} className={styles.Item}>
                             <img src={item.data.image[0] === "/" ? `${import.meta.env.VITE_PUBLIC}${item.data.image}` : item.data.image} alt="" />

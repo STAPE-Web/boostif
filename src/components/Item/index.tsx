@@ -17,7 +17,10 @@ const Item: FC<Props> = ({ item }) => {
 
             <div className={styles.Categories}>
                 {item.data.sections.map((i, index) => (
-                    <div key={index}>{i}</div>
+                    <div key={index} onClick={e => {
+                        e.stopPropagation()
+                        navigate(`/catalog/${item.id}?category=${i}`)
+                    }}>{i}</div>
                 ))}
             </div>
 

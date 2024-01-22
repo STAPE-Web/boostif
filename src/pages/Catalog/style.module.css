@@ -155,6 +155,11 @@
     color: #ffffff80;
 }
 
+.Categories div.ActiveCategory {
+    background: #564FFF;
+    color: #fff;
+}
+
 .Categories div:hover {
     background: #564FFF90;
     color: #fff;
