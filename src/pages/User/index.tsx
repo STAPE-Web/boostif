@@ -35,7 +35,7 @@ const User = () => {
     }
 
     return (
-        <main>
+        <main className={styles.Page}>
             <section className={styles.AccountInfo}>
                 <Avatar large sign={data?.data.username[0]} url={data?.data.avatar} />
                 <h3>{data?.data.username}</h3>
@@ -47,7 +47,7 @@ const User = () => {
             </section>
 
             <section className={styles.History}>
-                <h2>Orders History</h2>
+                <h2>My Orders</h2>
                 <OrderHistory />
             </section>
         </main>

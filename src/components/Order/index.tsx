@@ -8,6 +8,7 @@ import Select from "@/ui/Select"
 import { IArray, IArray2 } from "@/store/types/admin"
 import MultiSlider from "../MultiSlider"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
     data: IService | null
@@ -23,6 +24,7 @@ const Order: FC<Props> = ({ data }) => {
     const [oldPrice, setOldPrice] = useState(0)
 
     const platforms = ["PC", "Xbox", "PS"]
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (data !== undefined) {
@@ -98,7 +100,7 @@ const Order: FC<Props> = ({ data }) => {
                     {data?.data.oldPrice !== undefined && <h4>${(!Number.isNaN(oldPrice) ? oldPrice : 0).toFixed(2)}</h4>}
                 </div>
 
-                <Button onClick={() => Payment()}>Buy Now</Button>
+                <Button onClick={() => localStorage.getItem("userId") === null ? navigate("/signin") : Payment()}>Buy Now</Button>
             </div>
         </section>
     )
