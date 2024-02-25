@@ -1,0 +1,32 @@
+.Page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Page section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: #fff;
+}
+
+.Page div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Page p {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 14px;
+}
+
+.Page svg {
+    max-width: 300px;
+    color: #0AE160;
+}

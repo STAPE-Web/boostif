@@ -7,14 +7,16 @@ import { IService } from "@/types"
 import Select from "@/ui/Select"
 import { IArray, IArray2 } from "@/store/types/admin"
 import MultiSlider from "../MultiSlider"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 interface Props {
     data: IService | null
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
+    selectPrice: React.Dispatch<React.SetStateAction<string>>
+    setModalData: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Order: FC<Props> = ({ data }) => {
+const Order: FC<Props> = ({ data, setModal, setModalData, selectPrice }) => {
     const [value, setValue] = useState<IArray | null>(null)
     const [difficulty, setDifficulty] = useState<IArray | null>(null)
     const [check, setCheck] = useState<IArray2[]>([])
@@ -50,17 +52,24 @@ const Order: FC<Props> = ({ data }) => {
     }, [check, runs, data, value, difficulty, level]);
 
     async function Payment() {
-        const roundedPrice = Math.round(price * 100);
-        const data = await axios.post(
-            `${import.meta.env.VITE_SERVER}/payment`,
-            {
-                price: roundedPrice,
-            },
-        ).then(res => res.data);
+        setModal(true)
+        // const roundedPrice = Math.round(price * 100);
+        // const data = await axios.post(
+        //     `${import.meta.env.VITE_SERVER}/payment`,
+        //     {
+        //         price: roundedPrice,
+        //     },
+        // ).then(res => res.data);
 
-        console.log(data)
-        window.location.replace(data.session.url)
+        // console.log(data)
+        // window.location.replace(data.session.url)
     }
+
+    useEffect(() => {
+        setModalData(`${value !== null ? value.name : ""} ${difficulty !== null ? `· ${difficulty.name}` : ""}`)
+
+        selectPrice(String(price))
+    }, [value, difficulty, price])
 
     return (
         <section className={styles.Order}>

@@ -68,7 +68,7 @@ const Catalog = () => {
 
     return (
         <main className={styles.Page}>
-            <section className={styles.Section2}>
+            {/* <section className={styles.Section2}>
                 {game.length !== 0 && <SelectString array={games} setValue={(value) => gameHendler(value)} value={game[game.findIndex(i => i.id === id)].data.name} />}
 
                 {categories?.length !== 1 && <div className={styles.Categories}>
@@ -76,7 +76,7 @@ const Catalog = () => {
                         <div className={category === cat ? styles.ActiveCategory : ""} key={index} onClick={() => setSearchParams({ category: cat })}>{cat}</div>
                     ))}
                 </div>}
-            </section>
+            </section> */}
 
             <section className={styles.Section1}>
                 <h1>{game[game.findIndex(i => i.id === id)]?.data.name}</h1>

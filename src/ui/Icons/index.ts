@@ -14,6 +14,9 @@ import Edit from "./Edit";
 import Image from './Image'
 import Add from './Add'
 import AddGrid from './AddGrid'
+import Minus from './Minus'
+import Plus from './Plus'
+import Lock from './Lock'
 
 export {
     Search as SearchIcon,
@@ -31,5 +34,8 @@ export {
     Edit as EditIcon,
     Image as ImageIcon,
     Add as AddIcon,
-    AddGrid as AddGridIcon
+    AddGrid as AddGridIcon,
+    Minus as MinusIcon,
+    Plus as PlusIcon,
+    Lock as LockIcon
 }
