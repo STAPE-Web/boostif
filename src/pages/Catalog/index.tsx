@@ -1,19 +1,18 @@
 import styles from './style.module.css'
-import { useEffect, useState, useCallback, useMemo } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import useGlobalStore from '@/store'
 import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import Button from '@/ui/Buttons/Default'
 import { IGame, IService } from '@/types'
 import API from "@/api/items"
 import APIGame from "@/api/games"
-import SelectString from '@/ui/SelectString'
 
 const Catalog = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
     const changePage = useGlobalStore(state => state.changePage)
     const { id } = useParams()
     const navigate = useNavigate()
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const category = searchParams.get("category")
 
     useEffect(() => {
@@ -43,28 +42,28 @@ const Catalog = () => {
         getGame()
     }, [getData])
 
-    const games = useMemo(() => {
-        const array: string[] = []
+    // const games = useMemo(() => {
+    //     const array: string[] = []
 
-        game.forEach(el => {
-            array.push(el.data.name)
-        });
+    //     game.forEach(el => {
+    //         array.push(el.data.name)
+    //     });
 
-        return array;
-    }, [game])
+    //     return array;
+    // }, [game])
 
-    const categories = useMemo(() => {
-        const currentGame = game[game.findIndex(i => i.id == id)]
+    // const categories = useMemo(() => {
+    //     const currentGame = game[game.findIndex(i => i.id == id)]
 
-        if (currentGame !== undefined) {
-            return ["All", ...currentGame.data.sections]
-        }
-    }, [game, id])
+    //     if (currentGame !== undefined) {
+    //         return ["All", ...currentGame.data.sections]
+    //     }
+    // }, [game, id])
 
-    function gameHendler(value: string) {
-        const selectedGame = game.find(i => i.data.name === value)
-        navigate(`/catalog/${selectedGame?.id}`)
-    }
+    // function gameHendler(value: string) {
+    //     const selectedGame = game.find(i => i.data.name === value)
+    //     navigate(`/catalog/${selectedGame?.id}`)
+    // }
 
     return (
         <main className={styles.Page}>
