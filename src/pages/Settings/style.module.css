@@ -1,45 +1,63 @@
-.Settings {
-    width: 100%;
-    height: calc(100vh - 130px);
+.Page {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 50px;
 }
 
-.Settings section {
-    max-width: 500px;
-    width: 100%;
+.AccountInfo {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.AccountInfo button {
+    word-break: keep-all;
+}
+
+.AccountInfo h3 {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.AccountInfo div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.AccountInfo .Icon {
+    width: 30px;
+    height: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.AccountInfo .Icon:hover {
+    opacity: 0.7;
+}
+
+.History {
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto 100px auto;
     padding: 0 30px;
 }
 
-.Settings button {
-    width: 100%;
-}
-
-.Settings h1 {
+.History h2 {
     color: rgba(255, 255, 255, 0.50);
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: 30px;
 }
 
-.Settings .Icon {
-    width: 20px;
-    height: 20px;
-}
-
-.Line {
-    width: 120px;
-    background: rgba(255, 255, 255, 0.20);
-    height: 1px;
-    margin: 15px 0;
-}
-
-.Settings::before {
+.AccountInfo::before {
     content: '';
     position: absolute;
     width: 124px;
@@ -50,7 +68,7 @@
     left: 0;
 }
 
-.Settings::after {
+.AccountInfo::after {
     content: '';
     position: absolute;
     width: 210px;
@@ -61,8 +79,36 @@
     right: -30px;
 }
 
+.UserData {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .1);
+}
+
+.UserData button {
+    width: fit-content;
+}
+
+.Row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.DeleteIcon {
+    width: 20px;
+    height: 20px;
+}
+
 @media screen and (max-width: 1000px) {
-    .Settings::after {
+    .AccountInfo::after {
         display: none;
     }
 }

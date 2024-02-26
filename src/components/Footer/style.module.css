@@ -1,9 +1,10 @@
 .Footer {
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 50px;
+    /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 50px 30px;
 }
 
@@ -61,6 +62,26 @@
 
 .Bottom ul li:hover {
     opacity: 0.7;
+}
+
+.Payments {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    margin-bottom: 50px;
+}
+
+.Payments svg {
+    width: 100px;
+    height: auto;
+    fill: #505165;
+    color: #505165;
 }
 
 @media screen and (max-width: 800px) {

@@ -12,6 +12,7 @@ import Sofort from "@/assets/Payments/Sofort";
 import Visa from "@/assets/Payments/Visa";
 import { LockIcon } from "@/ui/Icons";
 import axios from "axios";
+import AMEX from "@/assets/Payments/AMEX";
 
 const Checkout = () => {
     const checkoutData = JSON.parse(localStorage.getItem('checkoutItem') as string);
@@ -80,6 +81,7 @@ const Checkout = () => {
                                 <GooglePay />
                                 <Sofort />
                                 <Visa />
+                                <AMEX />
                             </div>
                         </div>
 

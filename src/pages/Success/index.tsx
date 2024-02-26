@@ -19,10 +19,11 @@ const Success = () => {
     const Create = useCallback(() => {
         const checkoutItem = JSON.parse(localStorage.getItem("checkoutItem") as string)
         const checkoutData = JSON.parse(localStorage.getItem("checkoutData") as string)
+        const userId = JSON.parse(localStorage.getItem('userId') as string)
 
         if (checkoutItem !== null) {
             axios.post(`${import.meta.env.VITE_SERVER}/createOrder`, {
-                ...checkoutItem, ...checkoutData
+                ...checkoutItem, ...checkoutData, userId
             }).then(() => {
                 setSended(true)
             })

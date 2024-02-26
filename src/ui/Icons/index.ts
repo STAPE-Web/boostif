@@ -17,6 +17,12 @@ import AddGrid from './AddGrid'
 import Minus from './Minus'
 import Plus from './Plus'
 import Lock from './Lock'
+import User from './User'
+import Sword from './Sword'
+import Secure from './Secure'
+import Dimond from './Dimond'
+import Axe from './Axe'
+import Cash from './Cash'
 
 export {
     Search as SearchIcon,
@@ -37,5 +43,11 @@ export {
     AddGrid as AddGridIcon,
     Minus as MinusIcon,
     Plus as PlusIcon,
-    Lock as LockIcon
+    Lock as LockIcon,
+    User as UserIcon,
+    Sword as SwordIcon,
+    Secure as SecureIcon,
+    Dimond as DimondIcon,
+    Axe as AxeIcon,
+    Cash as CashIcon
 }

@@ -7,31 +7,59 @@
 
 .Item {
     background: rgba(255, 255, 255, 0.1);
-    height: 70px;
     border-radius: 15px;
-    padding: 0 30px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
+}
+
+.Item .ItemBox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Item img {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.Item .ItemBox div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Item h6 {
+    font-size: 12px;
+    color: #564FFF;
 }
 
 .Item h3 {
     color: #FFF;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
 }
 
 .Item p {
-    color: #FFF;
-    font-size: 32px;
-    font-weight: 600;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.NoOrders {
+    color: rgba(255, 255, 255, 0.3);
 }
 
 @media screen and (max-width: 400px) {
-    .Item {
+    /* .Item {
         flex-direction: column-reverse;
         height: auto;
         padding: 20px 30px;
         gap: 5px;
-    }
+    } */
 }

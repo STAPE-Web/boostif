@@ -3,11 +3,14 @@ import useGlobalStore from "@/store"
 import { useEffect, useState, useCallback } from "react"
 import Input from "@/ui/Input"
 import Button from '@/ui/Buttons/Default'
-import { DeleteIcon } from '@/ui/Icons'
+import { DeleteIcon, UserIcon } from '@/ui/Icons'
 import { IUser } from '@/types'
 import API from '@/api/user'
+import Avatar from '@/ui/Avatar'
+import { useNavigate } from 'react-router-dom'
 
 const Settings = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
     const [data, setData] = useState<IUser | null>(null)
@@ -43,18 +46,40 @@ const Settings = () => {
         })
     }
 
-    return (
-        <main className={styles.Settings}>
-            <section>
-                <h1>Settings</h1>
-                <Input label="Your Name" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Your Name" type="text" />
-                <Button onClick={() => updateData()}>Update Data</Button>
-                <div className={styles.Line} />
+    async function Logout() {
+        localStorage.removeItem('userId')
+        window.location.replace('/')
+    }
 
-                <Button red onClick={() => deleteData()}>
-                    <DeleteIcon className={styles.Icon} />
-                    Delete Account
-                </Button>
+    return (
+        <main className={styles.Page}>
+            <section className={styles.AccountInfo}>
+                <Avatar large sign={data?.data.username[0]} url={data?.data.avatar} />
+                <h3>{data?.data.username}</h3>
+
+                <div>
+                    <Button onClick={() => Logout()} red>Log out</Button>
+                    <UserIcon className={styles.Icon} onClick={() => navigate("/profile")} />
+                </div>
+            </section>
+
+            <section className={styles.History}>
+                <h2>Settings</h2>
+
+                <div className={styles.UserData}>
+                    <div className={styles.Row}>
+                        <Input label="Your Name" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Your Name" type="text" />
+                        <Input label="Your Email" value={data?.data.email || ""} onChange={() => ({})} placeholder="Enter Your Email" type="text" />
+                    </div>
+
+                    <div className={styles.Row}>
+                        <Button onClick={() => updateData()}>Update Data</Button>
+                        <Button red onClick={() => deleteData()}>
+                            <DeleteIcon className={styles.DeleteIcon} />
+                            Delete Account
+                        </Button>
+                    </div>
+                </div>
             </section>
         </main>
     )

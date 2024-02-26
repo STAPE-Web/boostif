@@ -4,6 +4,12 @@ import Logo from '@/assets/Logo.png'
 import { FacebookIcon, InstagramIcon, TiktokIcon, TwitterIcon, YouTubeIcon } from '@/ui/Icons'
 import useGlobalStore from '@/store'
 import { Link } from 'react-router-dom'
+import Mastercard from '@/assets/Payments/Mastercard'
+import ApplePay from '@/assets/Payments/ApplePay'
+import GooglePay from '@/assets/Payments/GooglePay'
+import Sofort from '@/assets/Payments/Sofort'
+import Visa from '@/assets/Payments/Visa'
+import AMEX from '@/assets/Payments/AMEX'
 
 const Footer = () => {
     const headerShown = useGlobalStore(state => state.headerShown)
@@ -57,6 +63,15 @@ const Footer = () => {
         <>
             {headerShown && <>
                 {page !== "Support" && <footer className={styles.Footer}>
+                    <div className={styles.Payments}>
+                        <Mastercard />
+                        <ApplePay />
+                        <GooglePay />
+                        <Sofort />
+                        <Visa />
+                        <AMEX />
+                    </div>
+
                     <div className={styles.Box}>
                         <div className={styles.Top}>
                             <img src={Logo} alt="" />

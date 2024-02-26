@@ -6,6 +6,8 @@ import { useEffect } from 'react'
 import useGlobalStore from '@/store'
 import { useSearchParams } from "react-router-dom"
 import TrustpilotWidget from '@/components/TrustBox'
+import PlayersChooseUs from '@/components/PlayersChooseUs'
+import Faq from '@/components/Faq'
 
 const Home = () => {
     const changeHeaderShown = useGlobalStore(state => state.changeHeaderShown)
@@ -45,8 +47,18 @@ const Home = () => {
             </section>
 
             <section className={styles.Section4}>
+                <h2>Why players choose us?</h2>
+                <PlayersChooseUs />
+            </section>
+
+            <section className={styles.Section4}>
                 <h2>How do I order?</h2>
                 <OrderSteps />
+            </section>
+
+            <section className={styles.Section3}>
+                <h2>FAQ</h2>
+                <Faq />
             </section>
         </main >
     )
